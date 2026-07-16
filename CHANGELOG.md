@@ -2,6 +2,10 @@
 
 표준 변경 이력. 버전은 [VERSION](VERSION)과 동기.
 
+## 0.4.0 — 2026-07-16
+
+- **general-engineering.md에 "핵심 행동 원칙" 추가** — Think Before Coding · Simplicity First · Surgical Changes · Goal-Driven. 특히 "코딩 전 추측 금지·트레이드오프 먼저 드러내기"(기존 rule의 공백). A. Karpathy 원칙(F. Chang 정리) + 사내 정리글 각색, 출처 표기. 모든 레포에 자동 적용.
+
 ## 0.3.0 — 2026-07-16
 
 - **HOOKS.md + 훅 예시 추가** — 결정론적 강제 장치. 검증된 스키마 요약, opt-in 예시 2종:
