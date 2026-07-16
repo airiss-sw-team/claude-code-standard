@@ -62,27 +62,49 @@
 
 ## 3. gstack 스킬 활용 (선택 도구)
 
-gstack은 **개인별 설치**(`~/.claude/skills/`)이며 레포에 커밋되지 않는다. 표준 필수는 아니지만, 설치했다면 추천 세트:
+gstack(Y Combinator Garry Tan 공개)은 Claude Code를 **가상 엔지니어링 팀**으로 만드는 23+개 슬래시 커맨드다. **개인별 설치**(`~/.claude/skills/`)이며 레포에 커밋되지 않는다. 표준 필수는 아니지만, 설치했다면 아래처럼 쓴다.
+📖 사내 정리: [설치 가이드(Windows)](https://hgko-dev.tistory.com/540) · [실전 워크플로 8가지](https://hgko-dev.tistory.com/549)
 
-| 스킬 | 용도 | 한 줄 사용법 |
+> ⚠ **비용 주의**: gstack 커맨드 하나가 보통 **수만~수십만 토큰**을 쓴다. 남발하지 말고 필요한 국면에만.
+> ⚠ **Windows**: PowerShell 대신 **Git Bash/WSL**에서 셋업하면 `.exe` 인식·Playwright 이슈를 피한다(블로그 540 참고).
+
+### 스킬 카테고리 (언제 무엇을)
+
+| 국면 | 스킬 | 용도 |
 |---|---|---|
-| `/qa` | 웹앱 자동 QA + 버그 수정 | 웹 프로젝트에서 "QA 돌려줘" |
-| `/wpf-audit` | **WPF 데스크톱 품질 감사** (DPI·테마·MVVM·가상화, P0~P3 리포트) | WPF 레포에서 "wpf-audit 실행해줘" |
-| `/audit` | 웹 접근성·성능·테마 감사 | 웹 레포용 (/wpf-audit의 웹 버전) |
-| `/investigate` | 근본원인 체계적 디버깅 | 재현 어려운 버그에 |
-| `/checkpoint` | 작업 상태 저장·복원 | 퇴근 전 "checkpoint", 다음날 "어디까지 했지?" |
-| `/ship` | 테스트→리뷰→버전→커밋→PR 일괄 | 릴리스 루틴 자동화 |
-| `/design-review` | 디자이너 관점 시각 QA | UI 작업 마무리에 |
-| `/plan-eng-review` | 플랜을 엔지니어링 매니저 관점 리뷰 | 큰 설계 확정 전 |
+| **기획/전략** | `/office-hours` · `/plan-ceo-review` | 아이디어 브레인스토밍 · 기능 전략 검토 |
+| **설계 리뷰** | `/plan-eng-review` · `/plan-design-review` · `/autoplan` | 아키텍처·디자인 플랜 검토 (`/autoplan`=CEO+Eng+Design 자동) |
+| **디자인** | `/design-consultation` · `/frontend-design` · `/design-review` | 디자인 시스템 상담 · UI 구현 · 시각 QA |
+| **코드 품질** | `/review` · `/simplify` · `/investigate` · `/codex` | PR 리뷰 · 정리 · 버그 원인분석 · 독립 이중검증 |
+| **QA** | `/qa` · `/qa-only` · `/wpf-audit` · `/audit` | 웹앱 자동 QA · WPF 품질감사 · 웹 접근성/성능 감사 |
+| **배포/운영** | `/ship` · `/land-and-deploy` · `/canary` · `/cso` | PR 생성 · 머지+배포+헬스체크 · 배포후 모니터 · 보안감사 |
+| **안전장치** | `/careful` · `/freeze [경로]` · `/unfreeze` | 위험작업 경고 · 범위 외 편집 차단 |
+| **회고/상태** | `/retro` · `/checkpoint` | 주간 커밋 회고 · 작업상태 저장·복원 |
+
+### 자주 쓰는 워크플로 조합 (이 두 개면 일상의 ~70%)
+
+**① 새 기능 개발 (풀 사이클)**
+```
+/office-hours → (plan.md) → /autoplan → 코딩 → /simplify → /review → /qa → /ship → /land-and-deploy
+```
+**② 빠른 버그 수정**
+```
+/careful → /investigate [버그] → 수정 → /review → /ship
+```
+그 외: **안전 리팩토링** `/freeze → /careful → 작업 → /unfreeze → /review` · **보안 점검** `/cso → 수정 → /review` · **성능** `/benchmark → 개선 → /benchmark(비교)`.
 
 ### 디자인 계열 (웹/UI 프로젝트)
 
-- **`/teach-impeccable`** — **프로젝트당 1회** 실행하는 디자인 셋업. 프로젝트의 디자인 컨텍스트(톤·타이포·색·간격 기준)를 수집해 AI 설정 파일에 저장 → 이후 모든 UI 생성물이 일관된 스타일을 따름. 새 웹/앱 프로젝트 초기에 실행 권장.
-- `/frontend-design` — 고품질 UI 구현(AI 특유의 밋밋함 회피)
-- `/design-consultation` — 디자인 시스템 제안(폰트+컬러 프리뷰 생성)
-- 부분 개선: `/polish`(마감) `/typeset`(타이포) `/colorize`(색) `/distill`(단순화) `/animate`(모션)
+- **`/teach-impeccable`** 또는 **`/design-consultation`** — **프로젝트당 1회**. 디자인 컨텍스트(톤·타이포·색·간격)를 수집해 저장 → 이후 UI 생성물이 일관. `DESIGN.md`를 만들면 CLAUDE.md에서 참조.
+- `/frontend-design`(구현) → `/design-review` + `/polish`(마감). 부분 개선: `/typeset` `/colorize` `/distill` `/animate`.
 
-**흐름 예시(웹)**: 프로젝트 초기 `/teach-impeccable` 1회 → 개발 중 `/frontend-design`으로 화면 구현 → 마무리에 `/design-review` + `/polish`.
+### 꿀팁 (블로그 549)
+
+- **계획 우선**: 5분 투자로 몇 시간 재작업 방지 — 큰 작업은 `/autoplan`·`/plan-eng-review` 없이 코딩 시작하지 말 것.
+- **`/setup-deploy`는 프로젝트당 1회** → 이후 배포 명령이 자동 연결.
+- **프로덕션/DB/라이브 작업엔 항상 `/careful` 먼저.**
+- **`/retro`로 반복 버그·시간낭비 패턴을 찾아 CLAUDE.md에 기록** — 스킬 결과가 표준을 개선하는 선순환.
+- 인증 필요한 페이지 QA는 `/setup-browser-cookies` → `/qa` 순서.
 
 ---
 
