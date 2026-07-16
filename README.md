@@ -3,6 +3,9 @@
 AIRISS 개발팀이 **Claude Code를 일관되게** 쓰기 위한 표준 템플릿 팩입니다.
 **스택 무관** — 웹 · 모바일/앱 · Python · .NET/WPF · 그 외 무엇이든 어떤 레포에도 **복사 → 살 붙이기**로 적용합니다. 특정 스택에 특화되어 있지 않으며, 스택별 규칙은 갈아 끼우는 모듈입니다.
 
+> ## 👉 처음이세요? **[START-HERE.md](START-HERE.md)** 부터 보세요.
+> 아무것도 몰라도 **순서대로 따라 하면 되는 단계별 튜토리얼**입니다 (흐름도 + 복붙 명령 + FAQ). 아래 README는 "구조 개요"이고, 손에 잡히는 시작은 START-HERE에 있습니다.
+
 **현재 버전**: [VERSION](VERSION) · 변경 이력: [CHANGELOG.md](CHANGELOG.md) · 오너: [GOVERNANCE.md](GOVERNANCE.md) §3
 
 ## 이게 뭔가
@@ -34,7 +37,8 @@ Claude Code는 세 곳에서 설정을 읽습니다. 이 표준은 그중 **레�
 
 ```
 claude-code-standard/
-├── README.md          # 이 문서
+├── START-HERE.md      # ⭐ 초보자용 단계별 튜토리얼 (여기부터)
+├── README.md          # 이 문서 (구조 개요)
 ├── ADOPTION.md        # 신규/기존 프로젝트 적용 플레이북
 ├── GUIDE.md           # 실전 사용 가이드 (레시피·스킬·안티패턴)
 ├── HOOKS.md           # 훅(결정론적 강제) 가이드
