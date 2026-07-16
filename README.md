@@ -20,8 +20,10 @@ Claude Code는 세 곳에서 설정을 읽습니다. 이 표준은 그중 **레�
 ## 채택 3단계 (요약)
 
 1. **복사**: `templates/` 안의 내용을 대상 레포 루트로 복사한다. (`.claude/`, `docs/` 폴더 포함 — 전부 `templates/` 안에 있음)
-2. **이름 변경·소비**: `*.template` 파일은 확장자를 떼고 placeholder(`{{...}}`)를 채운다. `gitignore.snippet`은 대상 레포 `.gitignore`에 **내용을 append한 뒤 스니펫 파일은 삭제**한다.
+2. **`.template` 채우기**: `*.template` 파일은 **① 확장자(`.template`)를 떼고 → ② 안의 `{{...}}`를 채운다.** 손으로 해도 되지만, **레포에서 `/adopt-standard`를 실행하면 Claude가 코드를 스캔해 자동으로 이름변경+채움**을 해줍니다(권장). `gitignore.snippet`은 `.gitignore`에 append 후 삭제. → 자세한 설명은 [ADOPTION.md](ADOPTION.md#template-파일이-뭔가요-처음이라면-여기부터).
 3. **스택 rule 정리**: `.claude/rules/`에서 이 레포 스택에 안 맞는 파일을 **반드시 삭제**한다(rules는 자동 로드되므로 남기면 그대로 적용됨).
+
+> 💡 **가장 쉬운 길**: 1번 복사만 하고 레포에서 **`/adopt-standard`** 한 번 실행하면 2·3번을 Claude가 알아서 처리합니다.
 
 자세한 절차·체크리스트는 **[ADOPTION.md](ADOPTION.md)** 참고.
 무엇을 커밋하고 무엇을 개인으로 두는지는 **[GOVERNANCE.md](GOVERNANCE.md)** 참고.

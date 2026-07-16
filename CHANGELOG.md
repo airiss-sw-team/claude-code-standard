@@ -2,6 +2,10 @@
 
 표준 변경 이력. 버전은 [VERSION](VERSION)과 동기.
 
+## 0.4.1 — 2026-07-16
+
+- **`.template` 사용법 문서화** — ADOPTION.md에 "`.template` 파일이 뭔가요?" 섹션 추가(2단계: 이름변경 → 채움, 수동 vs `/adopt-standard` 자동). README 채택 3단계에도 명시 + 링크. 팀원 온보딩 시 헤매지 않도록.
+
 ## 0.4.0 — 2026-07-16
 
 - **general-engineering.md에 "핵심 행동 원칙" 추가** — Think Before Coding · Simplicity First · Surgical Changes · Goal-Driven. 특히 "코딩 전 추측 금지·트레이드오프 먼저 드러내기"(기존 rule의 공백). A. Karpathy 원칙(F. Chang 정리) + 사내 정리글 각색, 출처 표기. 모든 레포에 자동 적용.
