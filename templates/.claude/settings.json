@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "//": "팀 공유 baseline. 비밀·위험권한 금지. 스택별 allow 예시는 ADOPTION.md 참조. deny는 레포에서 추가만 가능(완화는 표준 레포 PR).",
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git branch:*)",
+      "Bash(git add:*)",
+      "Bash(git restore:*)"
+    ],
+    "deny": [
+      "Bash(rm -rf /:*)",
+      "Read(.env)",
+      "Read(**/*.pem)",
+      "Read(**/.credentials.json)"
+    ]
+  }
+}

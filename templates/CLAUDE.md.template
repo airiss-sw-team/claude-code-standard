@@ -1,0 +1,52 @@
+# {{PROJECT_NAME}}
+
+> 이 파일은 Claude Code가 세션 시작 시 자동으로 읽는 프로젝트 오버뷰입니다.
+> **짧게 유지**하세요. 상세 규칙은 `.claude/rules/`에 두고 아래에서 참조만 합니다.
+> 아래 예시는 스택별로 하나씩 든 것일 뿐 — 이 레포의 실제 스택에 맞춰 채우세요.
+
+## 한 줄 요약
+{{ONE_LINE_SUMMARY}}
+<!-- 예(웹): 사내 대시보드 SPA / 예(Python): 업무 데이터 ETL·리포트 API / 예(앱): 현장 점검 모바일 앱 / 예(.NET): 산업 장비 제어 HMI -->
+
+## 기술 스택
+- **런타임/언어**: {{STACK}}
+  <!-- 예: Node 20 / TypeScript · Python 3.12 · Kotlin · .NET 10 / C# -->
+- **UI/프레임워크**: {{FRAMEWORK}}
+  <!-- 예: Next.js(App Router) · FastAPI · Flutter · WPF+Prism -->
+- **데이터/인프라**: {{DATA}}
+  <!-- 예: PostgreSQL, Redis · S3 · 로컬 JSON config -->
+
+## 빌드 · 테스트 · 실행
+```bash
+# 빌드
+{{BUILD_CMD}}      # 예: npm run build · (Python은 빌드 없음) · dotnet build <솔루션>.sln
+# 테스트
+{{TEST_CMD}}       # 예: npm test · pytest · dotnet test
+# 실행
+{{RUN_CMD}}        # 예: npm run dev · uvicorn app:api · flutter run · dotnet run --project <시작프로젝트>
+```
+<!-- 위 명령은 실제로 한 번 돌려서 동작을 확인한 뒤 기입할 것 -->
+
+## 구조 지도
+<!-- 주요 디렉토리/모듈/서비스가 각각 무슨 역할인지 1줄씩. 큰 레포일수록 이 표가 핵심 자산. -->
+| 위치 | 역할 |
+|---|---|
+| {{PART_1}} | {{ROLE_1}} |
+| {{PART_2}} | {{ROLE_2}} |
+
+상세 아키텍처: [docs/20_The_Wiki/architecture.md](docs/20_The_Wiki/architecture.md)
+
+## 코드 컨벤션
+- 규칙은 `.claude/rules/`의 파일들이 **자동 로드**되어 적용된다. 이 레포의 활성 규칙:
+  - `general-engineering.md` (공통, 항상)
+  - `{{STACK_RULE}}`  <!-- 예: web-react-next.md · python.md · mobile-app.md · dotnet-wpf-prism.md -->
+  <!-- rules/는 전부 자동 로드되므로, 여기 목록과 실제 폴더 내용을 일치시킬 것 -->
+- 새 코드는 주변 코드의 스타일(네이밍·주석 밀도·패턴)을 따른다.
+- 새로 만들기 전에 기존 유틸/패턴을 먼저 찾아 재사용한다.
+
+## 먼저 읽을 것
+- {{KEY_FILE_1}}   <!-- 예: 진입점/부트스트랩 파일 -->
+- {{KEY_FILE_2}}
+
+## 주의사항 / 하지 말 것
+- {{DONT_1}}

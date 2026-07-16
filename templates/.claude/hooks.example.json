@@ -1,0 +1,37 @@
+{
+  "//": "훅 예시. 기본 비활성. 쓸 항목만 골라 .claude/settings.json 의 'hooks' 키에 붙여넣고, 반드시 각자 환경에서 테스트한 뒤 커밋할 것. Windows는 Git Bash + jq 필요. 자세한 설명은 표준 레포의 HOOKS.md.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "//": "① 저장 시 포맷: Edit/Write 직후 확장자별 포매터 실행(설치 안 됐으면 조용히 넘어감).",
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/format-on-edit.sh\""
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "//": "② 표준 복사 파일 직접수정 차단(포크 드리프트 방지). 스택 무관, 안전.",
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard-standard-files.sh\""
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "//": "③ (선택) 응답 종료 시 린트/테스트 게이트 예시. 실패하면 decision:block 으로 재작업 유도. 루프 위험이 있으니 신중히. 스택에 맞게 command 교체.",
+        "//_example": "python: 'ruff check . || echo BLOCK' 식으로. 아래는 자리표시 — 실제 도입 시 HOOKS.md 참고해 작성.",
+        "matcher": "*",
+        "hooks": []
+      }
+    ]
+  }
+}

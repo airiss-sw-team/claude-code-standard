@@ -1,0 +1,12 @@
+# --- Claude Code 표준: 개인 파일 제외 (기존 .gitignore에 append) ---
+# ⚠ 대상 레포에 스택 표준 .gitignore(bin/obj, node_modules, __pycache__ 등)가
+#   아직 없다면 그것을 먼저 만들고, 이 스니펫을 뒤에 append 할 것.
+
+# 개인 메모 (팀 공유 아님)
+CLAUDE.local.md
+
+# 개인 권한/설정 오버라이드 (Claude Code가 자동 생성)
+.claude/settings.local.json
+
+# 커밋하는 것: CLAUDE.md, .claude/settings.json, .claude/rules/, .claude/commands/, .claude/agents/, docs/
+# 참고: 세션·플랜·히스토리는 레포가 아니라 ~/.claude/(사용자 전역)에 저장되므로 여기 넣을 필요 없음.
