@@ -1,7 +1,7 @@
 # Next.js / React 규칙 (웹 레포용)
 
 Next.js(App Router) / React 웹 프론트엔드 레포에서만 활성화.
-※ 표준 원본: claude-code-standard v0.7 — 이 파일은 레포에서 직접 수정하지 말 것(표준 레포 PR로).
+※ 표준 원본: claude-code-standard v0.8 — 이 파일은 레포에서 직접 수정하지 말 것(표준 레포 PR로).
 
 ## App Router
 - **서버 컴포넌트 기본**, 상호작용이 필요한 곳에만 `"use client"`.

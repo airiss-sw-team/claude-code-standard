@@ -1,8 +1,6 @@
 ---
-description: 이슈 번호 기반 수정 워크플로
-argument-hint: <issue-number 또는 설명>
+description: 버그·이슈를 표준 절차로 고친다 (근본 원인 규명 → 최소 수정 → 재현으로 검증). 이슈 번호나 증상 설명을 인자로 받는다.
 ---
-
 # /fix-issue <issue>
 
 $ARGUMENTS 에 해당하는 이슈를 표준 절차로 고친다.

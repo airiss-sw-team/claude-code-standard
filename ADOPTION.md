@@ -1,4 +1,5 @@
 # 적용 플레이북 (ADOPTION)
+> **독자**: 레포에 표준을 적용하는 사람 · **읽는 시점**: 레포당 1회 · 수동 적용이나 검증이 필요할 때
 
 레포에 이 표준을 적용하는 절차. 두 경우로 나뉩니다.
 
@@ -66,9 +67,16 @@
 
 ⚠ **deny·ask 규칙은 삭제·완화 금지** — 필요하면 표준 레포 PR로(GOVERNANCE §2). 파괴적·장비성 명령(DB 마이그레이션, 장비 제어, 배포)은 `ask`에 추가한다 — `ask`는 auto 모드에서도 분류기를 건너뛰고 사람에게 묻는다.
 
+### skills·agents 는 손대지 않는다
+
+`.claude/skills/`(8개)와 `.claude/agents/`는 **스택 무관**이라 그대로 두면 된다. 삭제 대상은 rules 뿐이다.
+스킬은 필요할 때만 로드되므로 안 쓰는 게 있어도 컨텍스트 비용이 거의 없다.
+이 레포 고유 절차가 생기면 `.claude/skills/<이름>/SKILL.md` 로 추가한다.
+
 ### rule 파일 작성 규약
 
 - **짧고 실행 가능하게.** 이 레포에서 실제로 지킬 것만. 안 지킬 규칙은 쓰지 않는다.
+- **원칙은 rule, 절차는 skill.** 여러 단계를 밟는 작업을 rule에 적으면 매 세션 컨텍스트를 먹는다.
 - 특정 파일에만 적용하려면 frontmatter에 `paths:`를 쓴다. 이러면 해당 패턴 파일을 다룰 때만 로드되어 컨텍스트를 아낀다:
   ```markdown
   ---
@@ -127,7 +135,7 @@
 `git subtree`는 채택 시 파일명이 바뀌므로(`*.template` → 실파일) 쓸 수 없다. 대신:
 
 1. 표준이 바뀌면 [CHANGELOG.md](CHANGELOG.md)에 기록되고 [VERSION](VERSION)이 올라간다.
-2. 각 레포는 **분기 1회** 자기 `.claude/rules/`·`commands/`·`agents/`를 표준 레포의 `templates/` 버전과 **diff 비교**해 반영한다:
+2. 각 레포는 **분기 1회** 자기 `.claude/rules/`·`skills/`·`agents/`를 표준 레포의 `templates/` 버전과 **diff 비교**해 반영한다:
    ```bash
    diff -ru <repo>/.claude/rules/ <standard>/templates/.claude/rules/
    ```

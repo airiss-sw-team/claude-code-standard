@@ -157,10 +157,15 @@ cp -r /d/path/to/claude-code-standard/templates/. .
 ```
 # 기능 만들 때:  Plan 모드로 시작 → 승인 → 구현
 #                (VS Code: 프롬프트 박스 아래 모드 인디케이터 클릭 / CLI: Shift+Tab)
-# 새 모듈:       /scaffold-feature <이름>
-# 버그:          /fix-issue <설명>
-# 커밋 전:       /code-review   또는  "code-reviewer로 검토해줘"
-# 문서 갱신:     /doc-sync
+# 큰 작업:      /plan-feature <무엇을 만들지>   (조사 → 플랜 → 승인 → 구현)
+# 새 모듈:      /scaffold-feature <이름>
+# 버그:         /fix-issue <설명>
+# 코드 정리:    /refactor <대상>
+# 커밋 전:      /code-review   또는  "code-reviewer로 검토해줘"
+# 커밋 · PR:    /commit  →  /open-pr
+# 문서 갱신:    /doc-sync
+#
+# 스킬 전체 목록과 설명: GUIDE.md 1장
 ```
 
 **되돌리고 싶으면**: 메시지에 마우스를 올리면 **되감기** 버튼이 나옵니다
@@ -222,18 +227,14 @@ Bash 대신 PowerShell 도구가 쓰이는데 허용목록에 `PowerShell(...)`�
 
 ---
 
-## 📚 다음에 읽을 것 (문서 지도)
+## 📚 다음에 읽을 것
 
-지금은 이 문서로 충분합니다. 더 깊이 들어갈 때:
+지금은 이 문서로 충분합니다. 더 깊이 들어갈 때 **어떤 문서를 읽어야 하는지**는
+[README.md](README.md) 의 "무엇을 읽어야 하나(역할별)" 표에 정리되어 있습니다.
 
-| 문서 | 언제 읽나 |
-|---|---|
-| [VSCODE-WINDOWS.md](VSCODE-WINDOWS.md) | **우리 팀 기본 환경**에서 다르게 동작하는 것들 (권한·훅·모드) |
-| [README.md](README.md) | 표준이 뭔지·왜 이렇게 설계했는지 개요 |
-| [ADOPTION.md](ADOPTION.md) | 수동 적용 절차·체크리스트 상세 |
-| [GUIDE.md](GUIDE.md) | 매일 쓰는 레시피 · gstack 스킬 · 안티패턴 |
-| [HOOKS.md](HOOKS.md) | 저장 시 포맷 등 자동화(훅) 켜기 |
-| [GOVERNANCE.md](GOVERNANCE.md) | 무엇을 커밋/개인으로 두나, 규칙 변경 절차 |
-| [BENCHMARKS.md](BENCHMARKS.md) | 타사(Anthropic·Rakuten…) 검증 패턴 |
+당장 도움이 될 두 개만 꼽자면:
+
+- [VSCODE-WINDOWS.md](VSCODE-WINDOWS.md) — 권한 프롬프트가 계속 뜨거나 훅이 안 돌 때
+- [GUIDE.md](GUIDE.md) — 팀 공통 스킬 8개와 매일 쓰는 레시피
 
 막히면 그냥 Claude Code에게 *"START-HERE 대로 하는 중인데 여기서 막혔어"* 라고 물어보세요.

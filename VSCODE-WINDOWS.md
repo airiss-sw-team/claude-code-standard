@@ -1,4 +1,5 @@
 # VS Code + Windows 가이드 (VSCODE-WINDOWS)
+> **독자**: Windows + VS Code로 개발하는 전원 · **읽는 시점**: 설치할 때 한 번 · 권한/훅이 안 먹을 때 다시
 
 우리 팀 대부분은 **Windows에서 VS Code 확장**으로 개발합니다. CLI 기준으로 쓰인 일반 문서와
 **실제로 다르게 동작하는 지점**만 모았습니다. 일상 사용법은 [GUIDE.md](GUIDE.md), 적용 절차는 [ADOPTION.md](ADOPTION.md).

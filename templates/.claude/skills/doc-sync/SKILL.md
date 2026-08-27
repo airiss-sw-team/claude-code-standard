@@ -1,7 +1,11 @@
 ---
-description: 코드 변경을 docs/20_The_Wiki 아키텍처 위키에 반영
+description: 코드 변경을 docs/20_The_Wiki 아키텍처 위키에 반영한다. 모듈 추가·삭제·역할 변경 후 문서가 코드와 어긋났을 때 사용.
+allowed-tools:
+  - Bash(git diff:*)
+  - Bash(git log:*)
+  - PowerShell(git diff *)
+  - PowerShell(git log *)
 ---
-
 # /doc-sync
 
 현재 레포의 코드와 `docs/20_The_Wiki/`의 문서를 동기화한다.

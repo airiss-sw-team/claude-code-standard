@@ -2,6 +2,51 @@
 
 표준 변경 이력. 버전은 [VERSION](VERSION)과 동기.
 
+## 0.8.0 — 2026-08-27
+
+**`.claude/` 최신화 + 팀 워크플로 스킬 확충 + 문서 구조 정리.**
+
+### commands → skills 이전 (구식 구조 탈피)
+공식 문서: *"Custom commands have been merged into skills."* `.claude/commands/`는 계속 동작하지만
+보조 파일·`disable-model-invocation`·모델 자동 호출을 못 쓴다. 8개 전부 `skills/<이름>/SKILL.md` 로.
+사용법(`/adopt-standard` 등)은 그대로 — 팀원 입장에서 바뀌는 게 없다.
+
+- `/adopt-standard` `/commit` `/open-pr` → **`disable-model-invocation: true`** (부작용이 커서 사용자만 호출)
+- `/scaffold-feature` `/fix-issue` `/refactor` `/plan-feature` `/doc-sync` → 모델 자동 호출 허용
+- `/doc-sync` `/commit` `/open-pr` `/plan-feature` → `allowed-tools` 로 읽기 전용 git 명령 선승인(프롬프트 감소)
+
+### 신규 스킬 4종 (가장 많이 쓰이는 워크플로)
+- **`/plan-feature`** — 조사 → 선택지·트레이드오프 → 플랜(목표·변경파일·검증방법·**안 하는 것**·위험) → 승인 후 구현
+- **`/commit`** — **시크릿 검사** → 의도치 않은 파일 확인(빌드 산출물·`.claude/settings.json`) → 의미 단위 분리 → Conventional Commits → 기본 브랜치 직접 커밋 방지
+- **`/open-pr`** — 브랜치 전체 변경 요약, 검증 체크리스트(실제로 한 것만), 레포 PR 템플릿 우선, `gh pr create`
+- **`/refactor`** — 왜 지금 하는지 확인 → 안전망(테스트·검증 수단) 확보 → 작은 단계 → 각 단계 검증. 추측성 추상화·동작 변경 끼워넣기 금지
+
+### rules 보강
+- **`general-engineering.md`** — "작업 순서"(조사→플랜→승인→구현→검증), **"코드 품질"**(이름·함수 크기·3회 규칙·죽은 코드·에러 삼키기 금지·매직넘버), **"프로젝트 구조"**(새 파일 자리·의존 방향), 커밋 규약(Conventional Commits) 추가. 63줄 유지.
+- **`documentation.md` 신규** — `paths: ["**/*.md","docs/**"]` 스코프라 **문서를 다룰 때만 로드**된다(항상 로드 아님). 사실만 쓰기·단일 출처·표/목록·언어 명시·PowerShell 병기.
+
+### 문서 구조 정리
+- **README를 "지도"로 축소** — 채택 절차 설명을 걷어내고 **역할별 "무엇을 읽어야 하나" 표**로 대체. 절차의 단일 출처는 START-HERE / ADOPTION 두 곳뿐(이전엔 세 곳에 중복되어 `.vscode/` 추가 때 세 곳을 다 고쳐야 했다).
+- **문서 지도 단일화** — START-HERE 하단의 중복 표를 제거하고 README로 위임.
+- **각 문서 첫 줄에 "독자 / 읽는 시점"** 표기 — 목록만 훑고도 내가 읽을 문서인지 판단되게.
+- GOVERNANCE에 **문서 개수 임계 규칙**(루트 `.md` 10개 초과 시 `guides/`로 분리)과 단일 출처 점검 항목 추가.
+
+### 도구 설치 가이드 (요청 반영)
+- **gstack** — 공식 README 기준 실제 설치 명령, 요구사항(Bun + **Windows는 Node.js도 필수**), Windows 주의(**Git Bash/WSL에서 셋업**, 개발자 모드 꺼져 있으면 `git pull` 후 `./setup` 재실행), `/gstack-upgrade`.
+- **Impeccable** — `npx impeccable install` → `/impeccable init`, 프로젝트당 1회 `/teach-impeccable`.
+- **Claude Design** — 슬라이드·목업·문서.
+- 사내 블로그 정리글 링크 보강: 도구 비교(610) · Impeccable 설치(551)/사용(550) · Claude Design(609·611·612·613) · AI 코딩 잘 시키는 법(605·606·608).
+
+### 공식 플러그인 안내 신설
+`security-guidance`(코딩 중 취약점 검사·수정) · `pr-review-toolkit` · `commit-commands`(우리 것과 겹침) · `github` MCP ·
+LSP 플러그인(**VS Code면 대체로 불필요** — IDE Problems 패널을 Claude가 이미 읽음).
+
+### 기타
+- `CLAUDE.md.template` — 활성 rule 목록에 `documentation.md`, "자주 쓰는 스킬" 절, Windows 명령 병기 안내 추가.
+- rule·agent 출처 표기 v0.7 → **v0.8** 동기화.
+- `.claude/rules/_README.txt` — **rule(원칙) vs skill(절차) 구분 기준** 명시.
+- GOVERNANCE·gitignore.snippet·ADOPTION의 `commands/` 참조를 `skills/`로 갱신.
+
 ## 0.7.0 — 2026-08-27
 
 **Windows + VS Code 정합성 감사 반영.** 공식 문서와 전면 대조해 사실이 틀렸거나 우리 환경에서 작동하지 않던 부분을 수정.

@@ -2,7 +2,7 @@
 
 모바일/데스크톱 앱 레포(iOS·Android·Flutter·React Native·Electron 등)에서 활성화.
 ※ 프레임워크가 다양하므로, 아래 공통 원칙 + 해당 레포의 실제 관례를 우선한다.
-※ 표준 원본: claude-code-standard v0.7 — 이 파일은 레포에서 직접 수정하지 말 것(표준 레포 PR로).
+※ 표준 원본: claude-code-standard v0.8 — 이 파일은 레포에서 직접 수정하지 말 것(표준 레포 PR로).
 
 ## 아키텍처
 - 이 레포의 상태관리/아키텍처 패턴(MVVM, MVI, Redux, Provider, Bloc 등)을 **따른다**. 새 패턴을 임의 도입하지 않는다.

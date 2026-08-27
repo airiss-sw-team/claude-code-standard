@@ -1,8 +1,7 @@
 ---
-description: 이 레포에 회사 Claude Code 표준을 자동 적용 (스택 감지 → rule 정리/생성 → CLAUDE.md 채움)
-argument-hint: (인자 없음)
+description: 이 레포에 회사 Claude Code 표준을 적용한다 (스택 감지 → rule 정리/생성 → CLAUDE.md 채움 → 검증). 표준 템플릿을 복사한 직후 1회 실행.
+disable-model-invocation: true
 ---
-
 # /adopt-standard
 
 이 레포에 claude-code-standard를 적용한다. ADOPTION.md의 수동 절차를 자동화한 것.

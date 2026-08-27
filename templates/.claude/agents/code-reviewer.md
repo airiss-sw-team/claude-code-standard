@@ -23,4 +23,4 @@ model: inherit
 - 필요한 파일은 Read/Grep으로 맥락을 본다.
 - VS Code에서 실행 중이면 `mcp__ide__getDiagnostics`로 **IDE가 이미 잡아둔 진단(Problems 패널)** 을 먼저 확인한다. 컴파일러가 이미 알려준 오류를 사람이 다시 찾게 하지 않는다.
 
-<!-- 표준 원본: claude-code-standard v0.7 (변경은 표준 레포 PR로) -->
+<!-- 표준 원본: claude-code-standard v0.8 (변경은 표준 레포 PR로) -->
