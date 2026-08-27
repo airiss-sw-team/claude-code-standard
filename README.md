@@ -58,7 +58,7 @@ claude-code-standard/
     │   ├── settings.json           # 권한 baseline (Bash + PowerShell 병기)
     │   ├── rules/                  # 항상 지킬 규칙 (자동 로드)
     │   ├── skills/                 # 절차 = 슬래시 명령 (필요할 때만 로드)
-    │   ├── agents/                 # 서브에이전트 (code-reviewer)
+    │   ├── agents/                 # 서브에이전트 (code-reviewer · verifier)
     │   ├── hooks/                  # 훅 스크립트 (.sh + .ps1, opt-in)
     │   └── hooks.example.json
     └── docs/                       # 지식관리(위키) 골격
