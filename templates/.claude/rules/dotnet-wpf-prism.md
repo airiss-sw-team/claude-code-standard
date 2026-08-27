@@ -1,7 +1,7 @@
 # .NET / WPF / Prism MVVM 규칙
 
 WPF 데스크톱(.NET, Prism/DryIoc) 레포에서 활성화.
-※ 표준 원본: claude-code-standard v0.1 — 이 파일은 레포에서 직접 수정하지 말 것(표준 레포 PR로).
+※ 표준 원본: claude-code-standard v0.7 — 이 파일은 레포에서 직접 수정하지 말 것(표준 레포 PR로).
 
 ## 아키텍처
 - **Prism 모듈 단위**로 기능을 나눈다. 각 기능 모듈은 `IModule`을 구현하고 `RegisterTypes`에서 DI 등록.
@@ -27,6 +27,7 @@ WPF 데스크톱(.NET, Prism/DryIoc) 레포에서 활성화.
 ## 하드웨어 · 위험
 - Detector / PLC / Vision 등 **실장비 연동 코드는 실장비 없이 임의 실행하지 않는다**.
 - 파괴적 동작(장비 제어, DB 마이그레이션)은 먼저 사용자에게 확인한다.
+- 위험 명령은 rule(권고)에만 기대지 말고 `.claude/settings.json` 의 **`ask` 규칙**으로 강제한다. `ask` 는 auto 모드에서도 분류기를 건너뛰고 사람에게 묻는다. 예: `"ask": ["Bash(dotnet ef database update:*)", "PowerShell(dotnet ef database update *)"]`
 
 ## 빌드
 - 정확한 빌드·실행 명령은 이 레포의 **CLAUDE.md**를 따른다(rule 파일에 레포 고유 값을 넣지 않는다).

@@ -1,0 +1,18 @@
+{
+  // Claude Code 팀 공통 워크스페이스 설정 (VS Code 확장용).
+  // ※ claudeCode.initialPermissionMode 는 "사용자 설정"에서만 읽히고 워크스페이스 값은 무시된다.
+  //    → 시작 권한 모드를 조직 차원에서 통제하려면 managed settings 를 써야 한다(VSCODE-WINDOWS.md 참고).
+
+  // Bypass permissions 모드를 모드 선택기에서 제거한다. 워크스페이스 값이 사용자 값을 이기므로
+  // 이 한 줄이 레포 차원의 skip-permissions 방어가 된다. 완화 금지(GOVERNANCE §2).
+  "claudeCode.allowDangerouslySkipPermissions": false,
+
+  // Claude가 파일을 읽거나 쓰기 전에 에디터의 미저장 변경을 저장한다.
+  "claudeCode.autosave": true,
+
+  // 파일 검색에서 .gitignore 패턴을 제외한다(bin/obj, node_modules 등이 컨텍스트를 먹지 않도록).
+  "claudeCode.respectGitIgnore": true,
+
+  // Claude 패널 위치: "sidebar" | "panel"
+  "claudeCode.preferredLocation": "sidebar"
+}

@@ -1,21 +1,31 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "//": "팀 공유 baseline. 비밀·위험권한 금지. 스택별 allow 예시는 ADOPTION.md 참조. deny는 레포에서 추가만 가능(완화는 표준 레포 PR).",
+  "//": "팀 공유 baseline. 비밀·위험권한 금지. 스택별 allow 추가 예시는 ADOPTION.md 참조.",
+  "//_windows": "Bash 와 PowerShell 을 반드시 병기할 것. 네이티브 Windows에서 Git for Windows가 없으면 Bash 도구 자체가 없고 PowerShell 도구가 쓰인다 → Bash(...) 규칙이 하나도 매칭되지 않는다.",
+  "//_deny": "deny·ask 는 레포에서 추가만 가능(완화는 표준 레포 PR). deny/ask 는 폴더 신뢰 전에도 즉시 적용되지만, allow 는 workspace trust 수락 후에만 적용된다.",
   "permissions": {
     "allow": [
-      "Read(**)",
-      "Bash(git status)",
-      "Bash(git diff:*)",
-      "Bash(git log:*)",
-      "Bash(git branch:*)",
-      "Bash(git add:*)",
-      "Bash(git restore:*)"
+      "Bash(git status)", "PowerShell(git status)",
+      "Bash(git diff:*)", "PowerShell(git diff *)",
+      "Bash(git log:*)", "PowerShell(git log *)",
+      "Bash(git branch:*)", "PowerShell(git branch *)",
+      "Bash(git add:*)", "PowerShell(git add *)",
+      "Bash(git restore:*)", "PowerShell(git restore *)"
+    ],
+    "ask": [
+      "Bash(git push:*)", "PowerShell(git push *)",
+      "Bash(git reset --hard:*)", "PowerShell(git reset --hard *)",
+      "Bash(git clean -fd:*)", "PowerShell(git clean -fd *)"
     ],
     "deny": [
-      "Bash(rm -rf /:*)",
-      "Read(.env)",
+      "Read(**/.env)",
+      "Read(**/.env.*)",
       "Read(**/*.pem)",
-      "Read(**/.credentials.json)"
+      "Read(**/*.pfx)",
+      "Read(**/*.p12)",
+      "Read(**/.credentials.json)",
+      "Read(**/secrets.json)",
+      "Read(**/appsettings.Production.json)"
     ]
   }
 }

@@ -2,9 +2,11 @@
 
 레포에 이 표준을 적용하는 절차. 두 경우로 나뉩니다.
 
-> **빠른 길**: `templates/` 내용을 복사한 뒤 레포에서 **`/adopt-standard`** 를 실행하면 아래 절차(스택 감지 → rule 정리/생성 → CLAUDE.md 채움 → gitignore)를 Claude가 자동으로 수행합니다. 아래는 수동 절차이자 자동 실행의 명세입니다.
+> **빠른 길**: `templates/` 내용을 복사한 뒤 레포에서 **`/adopt-standard`** 를 실행하면 아래 절차(스택 감지 → rule 정리/생성 → CLAUDE.md 채움 → gitignore → 검증)를 Claude가 자동으로 수행합니다. 아래는 수동 절차이자 자동 실행의 명세입니다.
 >
 > **아이디어/기획 단계라면**: 코드가 없어도 시작할 수 있습니다. 기획서·아이디어 메모를 `docs/10_Raw_Sources/`에 넣고, `architecture.md`에 설계 의도를 먼저 적으세요. 스택이 정해지는 순간 `/adopt-standard`로 rule을 생성하면 됩니다.
+>
+> 💻 Windows + VS Code에서 다르게 동작하는 부분은 [VSCODE-WINDOWS.md](VSCODE-WINDOWS.md).
 
 ## `.template` 파일이 뭔가요? (처음이라면 여기부터)
 
@@ -37,6 +39,7 @@
 | 원본 (templates/ 안) | 대상 레포에서 |
 |---|---|
 | `.claude/` | 그대로 `<repo>/.claude/` |
+| `.vscode/` | 그대로 `<repo>/.vscode/`. **이미 있으면 덮어쓰지 말고 `claudeCode.*` 키만 병합** |
 | `docs/` | 그대로 `<repo>/docs/` |
 | `CLAUDE.md.template` | `CLAUDE.md`로 **이름 변경** 후 placeholder 채움 |
 | `docs/20_The_Wiki/architecture.md.template` | `architecture.md`로 **이름 변경** 후 채움 |
@@ -44,20 +47,39 @@
 | `CLAUDE.local.md.template` | (선택) 개인 메모를 원하면 `CLAUDE.local.md`로 이름 변경, 아니면 삭제 |
 
 ⚠ **gitignore 주의**: 대상 레포에 스택 표준 `.gitignore`(예: .NET의 `bin/`·`obj/`·`.vs/`, Node의 `node_modules/`, Python의 `__pycache__/`)가 없으면 **그걸 먼저 만들고** 스니펫을 append 한다. 스니펫은 Claude 관련 항목만 담고 있다.
+⚠ 레포가 `.vscode/`를 통째로 무시하고 있다면 `!.vscode/settings.json`·`!.vscode/extensions.json` 예외를 뚫는다.
 
 ## 공통: 스택 rule 선택
 
-`.claude/rules/`는 **전부 자동 로드**되므로, `general-engineering.md`(항상 유지) + 이 레포 스택 파일만 남기고 **나머지는 반드시 삭제**한다.
+`.claude/rules/`의 **`.md` 파일은 전부 자동 로드**되므로, `general-engineering.md`(항상 유지) + 이 레포 스택 파일만 남기고 **나머지는 반드시 삭제**한다.
+(`_README.txt`와 `_TEMPLATE-new-stack.md.template`은 `.md`가 아니라 로드되지 않으므로 그대로 둬도 무방하다.)
 
-| 이 레포가… | 남길 rule | settings.json allow에 추가할 예시 |
+| 이 레포가… | 남길 rule | settings.json allow에 추가할 예시 (Bash + PowerShell 병기) |
 |---|---|---|
-| 웹 **프론트엔드** (React/Next 등) | `web-react-next.md` | `Bash(npm run build:*)` `Bash(npm test:*)` `Bash(npm run lint:*)` |
-| **Python** (FastAPI 등 웹 백엔드 · CLI · 스크립트 · ML 포함) | `python.md` | `Bash(pytest:*)` `Bash(ruff:*)` `Bash(uv run:*)` |
-| 모바일/앱 (iOS·Android·Flutter·RN·Electron) | `mobile-app.md` | `Bash(flutter:*)` `Bash(gradle:*)` `Bash(xcodebuild:*)` |
-| .NET / WPF 데스크톱 | `dotnet-wpf-prism.md` | `Bash(dotnet build:*)` `Bash(dotnet test:*)` `Bash(dotnet format:*)` |
+| 웹 **프론트엔드** (React/Next 등) | `web-react-next.md` | `Bash(npm run build:*)` + `PowerShell(npm run build *)` |
+| **Python** (FastAPI 등 웹 백엔드 · CLI · 스크립트 · ML 포함) | `python.md` | `Bash(pytest:*)` + `PowerShell(pytest *)` · `ruff` · `uv run` |
+| 모바일/앱 (iOS·Android·Flutter·RN·Electron) | `mobile-app.md` | `Bash(flutter:*)` + `PowerShell(flutter *)` · `gradle` · `xcodebuild` |
+| .NET / WPF 데스크톱 | `dotnet-wpf-prism.md` | `Bash(dotnet build:*)` + `PowerShell(dotnet build *)` · `dotnet test` · `dotnet format` |
 | 그 외 스택 (Go, Rust, …) | 새 파일 추가(예: `go.md`) | 해당 스택 빌드/테스트 명령 |
 
-⚠ **deny 규칙은 삭제·완화 금지** — 필요하면 표준 레포 PR로(GOVERNANCE §2).
+⚠ **allow는 Bash와 PowerShell을 반드시 병기한다.** 네이티브 Windows에서 Git for Windows가 없으면 **Bash 도구 자체가 없어** `Bash(...)` 규칙이 하나도 매칭되지 않는다. 병기하지 않으면 팀원마다 승인 프롬프트 경험이 갈린다.
+
+⚠ **deny·ask 규칙은 삭제·완화 금지** — 필요하면 표준 레포 PR로(GOVERNANCE §2). 파괴적·장비성 명령(DB 마이그레이션, 장비 제어, 배포)은 `ask`에 추가한다 — `ask`는 auto 모드에서도 분류기를 건너뛰고 사람에게 묻는다.
+
+### rule 파일 작성 규약
+
+- **짧고 실행 가능하게.** 이 레포에서 실제로 지킬 것만. 안 지킬 규칙은 쓰지 않는다.
+- 특정 파일에만 적용하려면 frontmatter에 `paths:`를 쓴다. 이러면 해당 패턴 파일을 다룰 때만 로드되어 컨텍스트를 아낀다:
+  ```markdown
+  ---
+  paths:
+    - "**/*.xaml"
+  ---
+  # XAML 전용 규칙...
+  ```
+- 프로젝트 고유 규칙은 이 폴더에 **새 파일**로 추가한다(표준에서 복사된 파일을 고치지 않는다).
+- 범용화 가치가 있으면 표준 레포로 승격한다.
+- 새 스택은 `_TEMPLATE-new-stack.md.template`을 복사해 10분 안에 작성한다.
 
 ---
 
@@ -68,7 +90,7 @@
 3. `CLAUDE.md`의 placeholder를 채운다. 빌드·테스트·실행 명령은 초안이라도 적는다.
 4. `docs/20_The_Wiki/architecture.md`를 채운다(초기에는 설계 의도 수준이면 충분).
 5. (선택) 레포 루트에서 `/init` 실행 → Claude가 CLAUDE.md 초안을 보강.
-6. **커밋**: `CLAUDE.md`, `.claude/`(settings.json·rules·commands·agents), `docs/`, `.gitignore`. (`*.local.*`은 자동 제외됨)
+6. **검증**(아래 "검증 절차") 후 **커밋**: `CLAUDE.md`, `.claude/`, `.vscode/`, `docs/`, `.gitignore`. (`*.local.*`은 자동 제외됨)
 
 ## B. 기존 프로젝트 (이미 코드가 큰 레포)
 
@@ -79,10 +101,24 @@
    - **구조 지도**: 주요 디렉토리/모듈/서비스가 각각 무슨 역할인지 1줄씩
    - 코드 컨벤션 (네이밍, 폴더 규칙, 이 레포의 아키텍처 패턴)
 3. **아키텍처 위키 작성**: `architecture.md`에 모듈 카탈로그·계층도를 정리. `[[문서명]]`으로 상호 링크.
-4. **권한 이관(중요)**: global `~/.claude/settings.json`에 흩어진 **이 레포 전용 allow 규칙**(빌드/테스트 등)을 레포 `.claude/settings.json`으로 옮긴다. → 팀원 전체가 clone만으로 동일 권한 획득.
-   - (선택) 훅을 쓰려면 [HOOKS.md](HOOKS.md) 참고해 `hooks.example.json`에서 골라 settings.json에 붙인다. 기본 비활성이므로 안 쓰면 그대로 둬도 무방.
-5. **검증**: 새 세션을 레포 루트에서 열어 구조 질문에 CLAUDE.md 기반 답이 나오는지 확인. 빌드 명령 1회 실행.
+4. **권한 이관(중요)**: global `~/.claude/settings.json`에 흩어진 **이 레포 전용 allow 규칙**(빌드/테스트 등)을 레포 `.claude/settings.json`으로 옮긴다(Bash+PowerShell 병기).
+   - (선택) 훅을 쓰려면 [HOOKS.md](HOOKS.md) 참고해 `hooks.example.json`에서 골라 settings.json에 붙인다. 기본 비활성이므로 안 쓰면 그대로 둬도 무방. **Windows는 `.ps1` 변형**을 쓰면 jq·Git Bash가 필요 없다.
+5. **검증**(아래) 수행.
 6. **커밋**: A-6과 동일.
+
+---
+
+## 검증 절차 (양쪽 공통)
+
+채택 직후 아래를 실제로 확인한다. "될 것이다"로 넘어가지 않는다.
+
+1. **폴더 신뢰 수락** — 첫 세션에 뜨는 신뢰 다이얼로그를 수락한다.
+   ⚠ 수락 전에는 `permissions.allow`가 **적용되지 않아** 계속 승인 프롬프트가 뜬다(`deny`·`ask`는 즉시 적용).
+2. **`claude doctor`** (통합 터미널) — 설정 파일에 Settings Error가 없는지.
+3. **`/context`** — **Memory files** 목록에 `CLAUDE.md`와 **의도한 rule만** 로드됐는지. 삭제했어야 할 스택 rule이 남아 있으면 여기서 드러난다.
+4. **`/`** 입력 — 이 레포의 커스텀 명령이 보이는지. (VS Code 확장은 명령 부분집합만 노출하므로, 안 보이면 통합 터미널의 CLI로.)
+5. **빌드 명령 1회 실행** — CLAUDE.md에 적은 명령이 실제로 도는지.
+6. **`git status`** — 공유/개인 파일이 의도대로 분리됐는지.
 
 ---
 
@@ -96,18 +132,25 @@
    diff -ru <repo>/.claude/rules/ <standard>/templates/.claude/rules/
    ```
 3. 각 rule 파일 하단의 출처 표기(`표준 원본: claude-code-standard vX.Y`)로 어느 버전에서 왔는지 추적한다.
+   ⚠ 표준 레포에서 rule 내용을 고칠 때는 **이 표기도 함께 올린다.** 안 그러면 추적 메커니즘이 무효가 된다.
 4. 레포 고유 규칙은 **별도 파일**로 둔다. 표준에서 복사된 파일은 레포에서 직접 수정하지 않는다(수정이 필요하면 표준 레포에 PR).
 
 ## 체크리스트 (복붙용)
 
 ```
-[ ] templates/ 내용 복사 (.claude/ + docs/ 포함)
+[ ] templates/ 내용 복사 (.claude/ + .vscode/ + docs/ 포함)
 [ ] CLAUDE.md.template → CLAUDE.md 이름 변경
 [ ] architecture.md.template → architecture.md 이름 변경
 [ ] gitignore.snippet → .gitignore에 append 후 스니펫 삭제 (스택 표준 gitignore 먼저!)
+[ ] .vscode/ 가 gitignore되고 있다면 settings.json·extensions.json 예외 뚫기
 [ ] CLAUDE.local.md.template → 쓸 거면 이름 변경, 아니면 삭제
-[ ] rules/에서 스택에 안 맞는 파일 삭제 (자동 로드되므로 필수)
+[ ] rules/에서 스택에 안 맞는 .md 삭제 (자동 로드되므로 필수)
 [ ] CLAUDE.md placeholder 전부 치환
+[ ] settings.json allow에 빌드/테스트 명령 추가 — Bash + PowerShell 병기
+[ ] 위험 명령(DB 마이그레이션·장비 제어·배포)을 ask에 추가
+[ ] 폴더 신뢰 다이얼로그 수락
+[ ] claude doctor 실행 (Settings Error 없음)
+[ ] /context 로 로드된 rule 확인
 [ ] 빌드/테스트 명령 실제 실행으로 확인
 [ ] (기존 레포) global settings.json → repo settings.json 권한 이관
 [ ] docs/20_The_Wiki/architecture.md 작성
