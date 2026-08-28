@@ -51,6 +51,22 @@
 특히 **VS Code 확장은 프로젝트 `.claude/settings.json`을 시작 권한 모드 결정에 쓰지 않으므로**,
 시작 모드를 조직 차원에서 통제하려면 managed settings가 유일한 수단이다. 상세: [VSCODE-WINDOWS.md](VSCODE-WINDOWS.md) 5절.
 
+### 플러그인·마켓플레이스 설치 정책
+
+플러그인과 마켓플레이스는 **사용자 권한으로 임의 코드를 실행**한다(공식 문서 경고).
+Anthropic은 플러그인에 포함된 MCP 서버·파일·소프트웨어를 통제하지 않으며 의도대로 동작하는지 검증하지도 않는다.
+개인 노트북이면 각자 책임이지만, **장비 제어 코드와 DB 접속 정보가 있는 회사 개발 머신**에서는 다르다.
+
+- **공식 마켓플레이스**(`claude-plugins-official`)와 **오너가 승인한 것**만 설치한다.
+  SNS·블로그에서 본 이름으로 마켓플레이스를 추가하지 않는다.
+- 레포에 강제하려면 `.claude/settings.json`의 `extraKnownMarketplaces`·`enabledPlugins`로 명시한다.
+  조직 차원으로 잠그려면 managed settings의 `strictKnownMarketplaces`를 쓴다.
+- **많이 까는 게 좋은 게 아니다.** 플러그인은 매 턴 컨텍스트를 먹는다.
+  `/plugin` 화면이 플러그인마다 **Context cost**를 표시하고 2주 이상 안 쓴 것을 **Not used recently**로 모아주는 이유가 그것이다.
+  CLAUDE.md 비대화를 경계하는 것과 같은 이유다.
+- **안 쓰는 플러그인은 지운다.** 분기 점검 때 `/plugin` → Not used recently를 확인한다.
+- 스킬 수십 개를 한 번에 얹는 대형 묶음(예: "마케팅 스킬 44개")은 **설명 수십 개가 매 대화에 올라간다**는 뜻이다. 필요한 것만.
+
 ## 3. 소유권 & 변경 절차
 
 - **표준 레포(claude-code-standard) 오너**: **airiss-hgko** (표준 도입 주도자. 변경 시 이 줄을 갱신할 것.)

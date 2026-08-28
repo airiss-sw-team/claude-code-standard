@@ -66,7 +66,7 @@ claude-code-standard/
         └── 20_The_Wiki/            # (AI 관리) 아키텍처 위키
 ```
 
-### 동봉된 팀 공통 스킬 8개
+### 동봉된 팀 공통 스킬 9개
 
 | 스킬 | 언제 |
 |---|---|
@@ -78,6 +78,7 @@ claude-code-standard/
 | `/commit` | 시크릿 검사 → 의미 단위 커밋 |
 | `/open-pr` | PR 생성 |
 | `/doc-sync` | 코드 ↔ 위키 동기화 |
+| `/work-log` | 그날 한 일 → 업무 시트 붙여넣기용 |
 
 ---
 

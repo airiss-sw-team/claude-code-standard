@@ -21,6 +21,7 @@ Windows + VS Code 환경 차이는 [VSCODE-WINDOWS.md](VSCODE-WINDOWS.md).
 | **`/commit`** | 커밋. **시크릿 검사** → 의미 단위 분리 → Conventional Commits | ❌ 사용자만 |
 | **`/open-pr`** | PR 생성. 브랜치 전체 변경 요약 + 검증 체크리스트 | ❌ 사용자만 |
 | **`/doc-sync`** | 코드 ↔ `docs/20_The_Wiki` 동기화 | ✅ |
+| **`/work-log`** | 그날 한 일을 **업무 시트 [업무 상세 내용] 칸**에 붙여넣을 형태로 정리 | ✅ |
 | **`/adopt-standard`** | 표준 적용 (레포당 1회) | ❌ 사용자만 |
 
 > **자동 호출** = Claude가 상황을 보고 알아서 꺼내 씁니다. *"결제 모듈 새로 만들어줘"* 라고만 해도
@@ -100,6 +101,7 @@ Windows + VS Code 환경 차이는 [VSCODE-WINDOWS.md](VSCODE-WINDOWS.md).
 의심될 때: "verifier로 이 주장을 반증해줘: <주장>"
 커밋:      /commit  →  /open-pr
 문서:      /doc-sync
+하루 끝:   /work-log            (업무 시트에 붙여넣을 일일로그)
 ```
 
 ---
@@ -197,6 +199,11 @@ gstack의 `/codex`(OpenAI Codex로 독립 이중검증)가 이 패턴입니다. 
 | **`commit-commands`** | 커밋·푸시·PR 워크플로 | 우리 `/commit`·`/open-pr`과 겹침 — 둘 중 하나만 |
 | **`github`** | GitHub MCP (이슈·PR 조회) | 이슈 트래커를 쓴다면 |
 | **`csharp-lsp` 등 LSP** | 언어 서버 연동 | **VS Code면 대체로 불필요** — IDE Problems 패널을 Claude가 이미 읽음 |
+
+**검토 중(비공식)**: `codex-plugin-cc` — Claude 안에서 OpenAI Codex를 함께 써 **교차 모델 검증**을 한다.
+위 [4장 ③번](#4-검증을-요구하는-법-교차검증--다중-에이전트)이 추천하는 패턴이라 우리에게 값어치가 있으나,
+**공식 마켓플레이스가 아니므로 오너 승인 후** 도입한다([GOVERNANCE](GOVERNANCE.md) §2 플러그인 설치 정책).
+gstack을 이미 쓴다면 `/codex`로 같은 효과를 낼 수 있다.
 
 ---
 
