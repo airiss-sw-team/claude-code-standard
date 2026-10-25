@@ -1,5 +1,5 @@
 # VS Code + Windows 가이드 (VSCODE-WINDOWS)
-> **독자**: Windows + VS Code로 개발하는 전원 · **읽는 시점**: 설치할 때 한 번 · 권한/훅이 안 먹을 때 다시
+> **독자**: Windows + VS Code로 개발하는 전원. **읽는 시점**: 설치할 때 한 번, 권한이나 훅이 안 먹을 때 다시
 
 우리 팀 대부분은 **Windows에서 VS Code 확장**으로 개발합니다. CLI 기준으로 쓰인 일반 문서와
 **실제로 다르게 동작하는 지점**만 모았습니다. 일상 사용법은 [GUIDE.md](GUIDE.md), 적용 절차는 [ADOPTION.md](ADOPTION.md).
@@ -11,7 +11,7 @@
 | | 하는 일 | 없으면 |
 |---|---|---|
 | **VS Code 확장** (`anthropic.claude-code`) | 일상 개발. 인라인 diff, 플랜 리뷰, 체크포인트, `@` 멘션 | 개발 불가 |
-| **CLI** (`claude`) | `claude mcp add` · `claude doctor` · `claude plugin` · `claude --resume` · 전체 슬래시 명령 | 위 명령들을 못 씀 |
+| **CLI** (`claude`) | `claude mcp add`, `claude doctor`, `claude plugin`, `claude --resume`, 전체 슬래시 명령 | 위 명령들을 못 씀 |
 
 > ⚠ **확장을 설치해도 터미널의 `claude` 명령은 생기지 않습니다.** 확장은 CLI 사본을 내부에 품고 있을 뿐
 > PATH에 등록하지 않습니다. `claude --version`이 안 된다고 설치가 실패한 게 아닙니다.
@@ -29,7 +29,7 @@ claude --version
 { "env": { "CLAUDE_CODE_GIT_BASH_PATH": "C:\Program Files\Git\bin\bash.exe" } }
 ```
 
-통합 터미널(`` Ctrl+` ``)에서 `claude`를 실행하면 IDE와 자동 연동됩니다(diff 뷰어·진단 공유).
+통합 터미널(`` Ctrl+` ``)에서 `claude`를 실행하면 IDE와 자동 연동됩니다(diff 뷰어와 진단 공유).
 외부 터미널이면 세션 안에서 `/ide`로 연결하세요.
 
 ---
@@ -54,17 +54,17 @@ Claude Code가 셸 명령을 실행하는 도구는 환경에 따라 **둘 중 �
 ]
 ```
 
-PowerShell 규칙은 **별칭이 정규화**되므로 cmdlet 이름으로 쓰면 됩니다(`Get-ChildItem` 규칙이 `ls`·`dir`·`gci`를 다 커버).
+PowerShell 규칙은 **별칭이 정규화**되므로 cmdlet 이름으로 쓰면 됩니다(`Get-ChildItem` 규칙이 `ls`, `dir`, `gci`를 다 커버).
 
 ### 이미 내장으로 막혀 있는 것 (직접 deny 쓸 필요 없음)
 
 - `rm`/`rmdir`이 **파일시스템 루트, 홈, Windows 드라이브 루트(`C:\`)와 그 최상위, 작업 디렉토리와 그 상위**를 지우려 하면
   allow 규칙이나 PreToolUse 훅이 허용해도 **내장 차단기**가 막습니다.
 - PowerShell `Remove-Item`은 더 엄격 — 시스템 경로와 와일드카드(`*`, `\*`)는 **모든 모드에서 무조건 거부**.
-- `.git`·`.vscode`·`.claude`·`.idea` 등은 **protected paths**라 어떤 모드에서도 자동 승인되지 않습니다.
+- `.git`, `.vscode`, `.claude`, `.idea` 등은 **protected paths**라 어떤 모드에서도 자동 승인되지 않습니다.
   `Edit(.claude/**)` 같은 allow 규칙을 써도 이 보호는 풀리지 않습니다.
 
-→ 우리가 직접 써야 하는 건 `rm` 방어가 아니라 **장비·DB·배포 명령의 `ask` 규칙**입니다. `ask`는 auto 모드에서도
+→ 우리가 직접 써야 하는 건 `rm` 방어가 아니라 **장비, DB, 배포 명령의 `ask` 규칙**입니다. `ask`는 auto 모드에서도
 분류기를 건너뛰고 사람에게 묻습니다.
 
 ---
@@ -81,13 +81,13 @@ VS Code 확장이 새 대화의 권한 모드를 정하는 순서:
 > **즉 VS Code 대화는 프로젝트의 `.claude/settings.json`을 시작 모드 결정에 쓰지 않습니다.**
 > 레포에 무엇을 커밋해도 팀원의 시작 모드는 바뀌지 않고, 기본은 **Auto 모드**(사람 대신 분류기가 검토)입니다.
 
-**장비 제어·DB가 걸린 레포라면 팀 차원의 결정이 필요합니다.** 통제 수단은 두 가지뿐:
+**장비 제어와 DB가 걸린 레포라면 팀 차원의 결정이 필요합니다.** 통제 수단은 두 가지뿐:
 
 - **개인**: VS Code 사용자 설정에 `"claudeCode.initialPermissionMode": "default"`(Manual) 또는 `"plan"`
 - **조직**: managed settings (5절)
 
 `.claude/settings.json`의 `permissions.allow`/`ask`/`deny` 자체는 **모드와 무관하게 잘 동작합니다.**
-`deny`·`ask`는 폴더 신뢰 전에도 즉시 적용되고, `allow`만 신뢰 수락 후 적용됩니다.
+`deny`와 `ask`는 폴더 신뢰 전에도 즉시 적용되고, `allow`만 신뢰 수락 후 적용됩니다.
 
 ### 대신 레포가 강제할 수 있는 것
 
@@ -176,7 +176,7 @@ managed 레이어는 **모든 설정을 이기고 개인이 완화할 수 없습
 | 플랜 리뷰 | Plan 모드에서 플랜이 Markdown 문서로 열리고 **인라인 코멘트**로 피드백 가능 |
 | IDE 진단 읽기 | Claude가 `mcp__ide__getDiagnostics`로 Problems 패널을 직접 봅니다 |
 
-> 💡 **IDE 진단 덕분에 LSP 플러그인(`csharp-lsp` 등)은 대체로 불필요합니다.** C# Dev Kit·Pylance가
+> 💡 **IDE 진단 덕분에 LSP 플러그인(`csharp-lsp` 등)은 대체로 불필요합니다.** C# Dev Kit과 Pylance가
 > 이미 채워주는 Problems 패널을 Claude가 그대로 읽습니다.
 
 ### 선택 영역이 자동으로 전송된다

@@ -1,7 +1,7 @@
 ﻿# guard-standard-files.ps1 — 표준 레포에서 복사된 파일을 레포에서 직접 수정하려 하면 차단 (Windows / PowerShell 변형)
 # GOVERNANCE의 "포크 드리프트 금지"를 결정론적으로 강제한다.
 # 연결: .claude/settings.json 의 PreToolUse(Edit|Write) 훅에서 exec 형태로 호출.
-# 요구: PowerShell 5.1 이상. jq·Git Bash 불필요.
+# 요구: PowerShell 5.1 이상. jq와 Git Bash 불필요.
 # exit 2 = 차단, stderr 메시지가 Claude에게 전달된다.
 # ※ 이 파일은 UTF-8 with BOM 으로 저장되어 있다.
 # ※ 마커 검색은 ASCII 부분('claude-code-standard')만 쓴다 — 파일 인코딩에 상관없이 매칭되도록.

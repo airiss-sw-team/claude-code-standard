@@ -3,7 +3,7 @@
 # 연결: .claude/settings.json 의 PostToolUse(Edit|Write) 훅에서 exec 형태로 호출.
 #   "command": "powershell.exe",
 #   "args": ["-NoProfile","-ExecutionPolicy","Bypass","-File","${CLAUDE_PROJECT_DIR}/.claude/hooks/format-on-edit.ps1"]
-# 요구: PowerShell 5.1 이상. jq·Git Bash 불필요.
+# 요구: PowerShell 5.1 이상. jq와 Git Bash 불필요.
 # ※ 이 파일은 UTF-8 with BOM 으로 저장되어 있다(PowerShell 5.1이 한글 주석을 깨지 않게 하려면 BOM이 필요).
 
 $ErrorActionPreference = 'SilentlyContinue'

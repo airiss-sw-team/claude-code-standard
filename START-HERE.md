@@ -1,7 +1,7 @@
 # 🚀 여기서 시작하세요 (START HERE)
 
 > **이 문서 하나만 따라 하면 됩니다.** Claude Code를 처음 써보는 사람도 순서대로 복붙하면 프로젝트에 표준이 적용됩니다.
-> 다른 문서(README·ADOPTION·GUIDE…)는 "더 알고 싶을 때" 참고용입니다. 지금은 이 문서만.
+> 다른 문서(README, ADOPTION, GUIDE…)는 "더 알고 싶을 때" 참고용입니다. 지금은 이 문서만.
 >
 > 💻 우리 팀 기본 환경은 **Windows + VS Code 확장**입니다. 아래 명령은 그 기준으로 적었습니다.
 
@@ -11,10 +11,10 @@
 
 ```mermaid
 flowchart LR
-    A([아이디어]) --> B[1. gstack로<br/>설계·구조 잡기]
+    A([아이디어]) --> B[1. gstack로<br/>설계와 구조 잡기]
     B --> C[2. 표준 템플릿<br/>복사]
     C --> D[3. /adopt-standard<br/>자동 셋업]
-    D --> E[4. 설계·디자인<br/>리뷰]
+    D --> E[4. 설계와 디자인<br/>리뷰]
     E --> F[5. 개발 →<br/>검증 → 커밋]
     F --> G([팀 공유 완료])
     style A fill:#e8f5e9
@@ -22,7 +22,7 @@ flowchart LR
     style D fill:#fff3e0
 ```
 
-**핵심**: 1·4번은 gstack(선택), **2·3번이 이 표준의 본체**, 5번은 일상. gstack이 없어도 2·3·5만으로 충분히 돌아갑니다.
+**핵심**: 1, 4번은 gstack(선택), **2, 3번이 이 표준의 본체**, 5번은 일상. gstack이 없어도 2, 3, 5만으로 충분히 돌아갑니다.
 
 ---
 
@@ -62,10 +62,10 @@ Git Bash가 없으면 Claude Code가 Bash 도구 없이 PowerShell 도구만 쓰
 (자세히는 [VSCODE-WINDOWS.md](VSCODE-WINDOWS.md) 2절).
 
 ### 3. (선택) gstack
-설계·리뷰·QA·배포 자동화 스킬 묶음. 없어도 표준은 동작.
+설계, 리뷰, QA, 배포 자동화 스킬 묶음. 없어도 표준은 동작.
 설치법(Windows): 사내 정리 [gstack 설치 가이드](https://hgko-dev.tistory.com/540) 참고.
 
-> 👉 gstack이 없으면 **1번과 4번 단계를 건너뛰고** 2·3·5번만 하면 됩니다. 나중에 설치해도 됩니다.
+> 👉 gstack이 없으면 **1번과 4번 단계를 건너뛰고** 2, 3, 5번만 하면 됩니다. 나중에 설치해도 됩니다.
 
 ---
 
@@ -83,7 +83,7 @@ Git Bash가 없으면 Claude Code가 Bash 도구 없이 PowerShell 도구만 쓰
 ```
 
 **결과물**: 정리된 계획. 이걸 나중에 `docs/10_Raw_Sources/` 에 넣어둘 겁니다(원천 자료).
-가진 게 기획서·메모뿐이어도 OK — 그걸 Claude에게 보여주며 정리하면 됩니다.
+가진 게 기획서와 메모뿐이어도 OK — 그걸 Claude에게 보여주며 정리하면 됩니다.
 
 ### 2단계 — 표준 템플릿 복사
 
@@ -123,18 +123,18 @@ cp -r /d/path/to/claude-code-standard/templates/. .
 그러면 Claude가 **자동으로**:
 - 🔍 이 레포 코드를 스캔해 **스택 감지**(웹? Python? .NET? …)
 - 🧹 안 맞는 스택 rule 삭제, 없는 스택이면 rule **새로 생성**
-- ✍️ `CLAUDE.md.template` → `CLAUDE.md` 로 이름 바꾸고 **내용까지 채움**(빌드 명령·구조 지도)
-- ⚙️ `.gitignore`·`.vscode` 정리, 권한(Bash+PowerShell 병기) 추가
+- ✍️ `CLAUDE.md.template` → `CLAUDE.md` 로 이름 바꾸고 **내용까지 채움**(빌드 명령과 구조 지도)
+- ⚙️ `.gitignore`와 `.vscode` 정리, 권한(Bash+PowerShell 병기) 추가
 
 **즉, "복사 + `/adopt-standard`" 이 두 단계가 셋업의 전부입니다.**
 
 > **첫 세션에 "이 폴더를 신뢰하시겠습니까?" 다이얼로그가 뜨면 수락하세요.**
 > 수락 전에는 레포의 `allow` 권한 규칙이 적용되지 않아 계속 승인 프롬프트가 뜹니다
-> (`deny`·`ask`는 신뢰와 무관하게 즉시 적용됩니다).
+> (`deny`와 `ask`는 신뢰와 무관하게 즉시 적용됩니다).
 
 > 자동 결과가 100% 완벽하진 않습니다. 나온 `CLAUDE.md`를 눈으로 훑고 틀린 곳만 손보세요.
 
-### 4단계 — 설계·디자인 리뷰 (gstack, 선택)
+### 4단계 — 설계와 디자인 리뷰 (gstack, 선택)
 
 본격 코딩 전에 설계를 점검:
 
@@ -147,7 +147,7 @@ cp -r /d/path/to/claude-code-standard/templates/. .
 
 웹/UI 프로젝트면 디자인 기준도 한 번 잡아두면 좋습니다:
 ```
-/design-consultation   ← 폰트·색·톤 기준 잡기 (프로젝트당 1회) → DESIGN.md
+/design-consultation   ← 폰트, 색, 톤 기준 잡기 (프로젝트당 1회) → DESIGN.md
 ```
 
 ### 5단계 — 개발 → 검증 → 커밋
@@ -162,7 +162,7 @@ cp -r /d/path/to/claude-code-standard/templates/. .
 # 버그:         /fix-issue <설명>
 # 코드 정리:    /refactor <대상>
 # 커밋 전:      /code-review   또는  "code-reviewer로 검토해줘"
-# 커밋 · PR:    /commit  →  /open-pr
+# 커밋과 PR:   /commit  →  /open-pr
 # 문서 갱신:    /doc-sync
 #
 # 스킬 전체 목록과 설명: GUIDE.md 1장
@@ -171,7 +171,7 @@ cp -r /d/path/to/claude-code-standard/templates/. .
 **되돌리고 싶으면**: 메시지에 마우스를 올리면 **되감기** 버튼이 나옵니다
 (코드만 되감기 / 대화 분기 / 둘 다). Windows에는 샌드박스가 없으니 이게 실질적인 undo입니다.
 
-마지막으로 **커밋**하면 끝. 이제 팀원이 이 레포를 clone하면 **같은 CLAUDE.md·규칙·명령**을 자동으로 갖게 됩니다.
+마지막으로 **커밋**하면 끝. 이제 팀원이 이 레포를 clone하면 **같은 CLAUDE.md, 규칙, 명령**을 자동으로 갖게 됩니다.
 
 ```powershell
 git add -A
@@ -187,8 +187,8 @@ git commit -m "표준 적용 + 초기 구조"
 새로 만드는 게 아니라 **기존 코드가 큰 레포**에 도입하는 경우도 거의 같습니다:
 
 1. 2단계처럼 `templates/` 복사.
-2. `/adopt-standard` 실행 → Claude가 **기존 코드를 역설계**해서 CLAUDE.md(구조 지도·빌드 명령)와 `docs/20_The_Wiki/architecture.md`를 채워 줍니다.
-3. 나온 초안을 팀이 검토·수정.
+2. `/adopt-standard` 실행 → Claude가 **기존 코드를 역설계**해서 CLAUDE.md(구조 지도와 빌드 명령)와 `docs/20_The_Wiki/architecture.md`를 채워 줍니다.
+3. 나온 초안을 팀이 검토하고 수정.
 4. 커밋. 끝.
 
 > 실제 적용 예시: 이 표준은 수십 개 프로젝트 규모의 대형 WPF 솔루션에 먼저 적용해봤습니다. 그 결과물이 레퍼런스입니다.
@@ -220,7 +220,7 @@ CLI도 쓰려면 준비물 0️⃣의 ②를 실행하세요.
 Bash 대신 PowerShell 도구가 쓰이는데 허용목록에 `PowerShell(...)`이 없으면 다 물어봅니다 → [VSCODE-WINDOWS.md](VSCODE-WINDOWS.md) 2절.
 
 **Q. gstack 꼭 필요해요?**
-→ 아니요. 2·3·5단계(복사 → `/adopt-standard` → 개발)만으로 표준은 완전히 동작합니다. gstack은 선택 도구입니다. 커맨드당 토큰을 많이 쓰니(수만~수십만) 필요할 때만.
+→ 아니요. 2, 3, 5단계(복사 → `/adopt-standard` → 개발)만으로 표준은 완전히 동작합니다. gstack은 선택 도구입니다. 커맨드당 토큰을 많이 쓰니(수만~수십만) 필요할 때만.
 
 **Q. 안 쓰는 스택 rule을 안 지우면?**
 → `.claude/rules/`의 `.md`는 **전부 자동 로드**되므로, 예를 들어 웹 레포에 WPF 규칙이 남아 있으면 엉뚱하게 적용됩니다. 꼭 지우세요(`/adopt-standard`가 대신 해줍니다).
