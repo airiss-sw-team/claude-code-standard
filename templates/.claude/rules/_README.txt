@@ -11,5 +11,5 @@ rule(권고) vs skill(절차)의 구분:
   - "항상 지켜야 하는 원칙"  → rules/     (예: 이름 짓기, 커밋 규약)
   - "여러 단계를 밟는 작업"   → skills/    (예: /commit, /plan-feature, /refactor)
 
-작성 규약·전체 설명: 표준 레포의 ADOPTION.md "스택 rule 선택" 절.
+작성 규약과 전체 설명: 표준 레포의 ADOPTION.md "스택 rule 선택" 절.
 (이 안내를 .md 로 두면 그것마저 매 세션 로드되므로 .txt 로 둡니다.)

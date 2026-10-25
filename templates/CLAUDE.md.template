@@ -6,24 +6,24 @@
 
 ## 한 줄 요약
 {{ONE_LINE_SUMMARY}}
-<!-- 예(웹): 사내 대시보드 SPA / 예(Python): 업무 데이터 ETL·리포트 API / 예(앱): 현장 점검 모바일 앱 / 예(.NET): 산업 장비 제어 HMI -->
+<!-- 예(웹): 사내 대시보드 SPA / 예(Python): 업무 데이터 ETL과 리포트 API / 예(앱): 현장 점검 모바일 앱 / 예(.NET): 산업 장비 제어 HMI -->
 
 ## 기술 스택
 - **런타임/언어**: {{STACK}}
-  <!-- 예: Node 20 / TypeScript · Python 3.12 · Kotlin · .NET 10 / C# -->
+  <!-- 예: Node 20 / TypeScript, Python 3.12, Kotlin, .NET 10 / C# -->
 - **UI/프레임워크**: {{FRAMEWORK}}
-  <!-- 예: Next.js(App Router) · FastAPI · Flutter · WPF+Prism -->
+  <!-- 예: Next.js(App Router), FastAPI, Flutter, WPF+Prism -->
 - **데이터/인프라**: {{DATA}}
-  <!-- 예: PostgreSQL, Redis · S3 · 로컬 JSON config -->
+  <!-- 예: PostgreSQL, Redis, S3, 로컬 JSON config -->
 
-## 빌드 · 테스트 · 실행
+## 빌드, 테스트, 실행
 ```bash
 # 빌드
-{{BUILD_CMD}}      # 예: npm run build · (Python은 빌드 없음) · dotnet build <솔루션>.sln
+{{BUILD_CMD}}      # 예: npm run build, (Python은 빌드 없음), dotnet build <솔루션>.sln
 # 테스트
-{{TEST_CMD}}       # 예: npm test · pytest · dotnet test
+{{TEST_CMD}}       # 예: npm test, pytest, dotnet test
 # 실행
-{{RUN_CMD}}        # 예: npm run dev · uvicorn app:api · flutter run · dotnet run --project <시작프로젝트>
+{{RUN_CMD}}        # 예: npm run dev, uvicorn app:api, flutter run, dotnet run --project <시작프로젝트>
 ```
 <!-- 위 명령은 실제로 한 번 돌려서 동작을 확인한 뒤 기입할 것 -->
 <!-- Windows 팀이면 PowerShell 기준으로 쓰거나 병기할 것 -->
@@ -41,13 +41,13 @@
 - 규칙은 `.claude/rules/`의 파일들이 **자동 로드**되어 적용된다. 이 레포의 활성 규칙:
   - `general-engineering.md` (공통, 항상)
   - `documentation.md` (문서 작업 시에만 — `paths:` 스코프)
-  - `{{STACK_RULE}}`  <!-- 예: web-react-next.md · python.md · mobile-app.md · dotnet-wpf-prism.md -->
+  - `{{STACK_RULE}}`  <!-- 예: web-react-next.md, python.md, mobile-app.md, dotnet-wpf-prism.md -->
   <!-- rules/의 .md는 전부 자동 로드되므로, 여기 목록과 실제 폴더 내용을 일치시킬 것 -->
-- 새 코드는 주변 코드의 스타일(네이밍·주석 밀도·패턴)을 따른다.
+- 새 코드는 주변 코드의 스타일(네이밍, 주석 밀도, 패턴)을 따른다.
 - 새로 만들기 전에 기존 유틸/패턴을 먼저 찾아 재사용한다.
 
 ## 자주 쓰는 스킬
-`/plan-feature`(조사·설계) · `/scaffold-feature`(새 모듈) · `/fix-issue`(버그) · `/refactor`(정리) · `/commit` · `/open-pr` · `/doc-sync`
+`/plan-feature`(조사와 설계), `/scaffold-feature`(새 모듈), `/fix-issue`(버그), `/refactor`(정리), `/commit`, `/open-pr`, `/doc-sync`
 <!-- 이 레포 고유 절차가 생기면 .claude/skills/<이름>/SKILL.md 로 추가할 것 -->
 
 ## 먼저 읽을 것
@@ -56,5 +56,5 @@
 
 ## 주의사항 / 하지 말 것
 - {{DONT_1}}
-<!-- 되돌리기 어려운 것, 장비·DB·마이그레이션처럼 위험한 것을 여기 적을 것.
+<!-- 되돌리기 어려운 것, 장비, DB, 마이그레이션처럼 위험한 것을 여기 적을 것.
      "권고"로 부족하면 .claude/settings.json 의 ask/deny 규칙으로 강제할 것. -->

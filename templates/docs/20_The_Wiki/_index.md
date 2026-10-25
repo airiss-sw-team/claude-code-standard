@@ -1,6 +1,6 @@
 # 20_The_Wiki (아키텍처 위키)
 
-Claude가 코드를 분석해 작성·유지하는 정제된 지식 문서 공간입니다.
+Claude가 코드를 분석해 작성하고 유지하는 정제된 지식 문서 공간입니다.
 문서 간에는 `[[문서명]]` 형태의 위키링크로 연결합니다.
 
 ## 규칙
@@ -9,7 +9,7 @@ Claude가 코드를 분석해 작성·유지하는 정제된 지식 문서 공�
 - 원천 자료가 필요하면 `../10_Raw_Sources/`를 **읽기만** 한다.
 
 ## 문서 목록
-- [[architecture]] — 모듈 카탈로그 · 계층 구조 · 데이터 흐름 (`architecture.md.template`을 채워 `architecture.md`로)
+- [[architecture]] — 모듈 카탈로그, 계층 구조, 데이터 흐름 (`architecture.md.template`을 채워 `architecture.md`로)
 - (추가 문서를 여기 링크)
 
 ## 시작 팁

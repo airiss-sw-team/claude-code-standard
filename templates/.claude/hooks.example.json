@@ -1,6 +1,6 @@
 {
   "//": "훅 예시. 기본 비활성. 쓸 항목만 골라 .claude/settings.json 의 'hooks' 키에 붙여넣고, 반드시 각자 환경에서 테스트한 뒤 커밋할 것. 자세한 설명은 표준 레포의 HOOKS.md.",
-  "//_windows": "Windows는 아래 *_powershell 변형을 쓰면 Git Bash·jq 없이 동작한다. Git Bash가 팀 전원에게 보장된다면 bash 변형을 써도 된다.",
+  "//_windows": "Windows는 아래 *_powershell 변형을 쓰면 Git Bash와 jq 없이 동작한다. Git Bash가 팀 전원에게 보장된다면 bash 변형을 써도 된다.",
   "//_matcher": "matcher 에 MultiEdit 를 쓰지 말 것(레거시 도구명이라 매칭되지 않음). Edit|Write 로 충분하다.",
   "hooks": {
     "PostToolUse": [
@@ -28,7 +28,7 @@
     ],
     "PreToolUse": [
       {
-        "//": "② 표준 복사 파일 직접수정 차단(포크 드리프트 방지). 스택 무관·안전. bash 변형.",
+        "//": "② 표준 복사 파일 직접수정 차단(포크 드리프트 방지). 스택 무관, 안전. bash 변형.",
         "matcher": "Edit|Write",
         "hooks": [
           {
