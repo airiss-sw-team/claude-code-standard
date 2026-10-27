@@ -32,9 +32,10 @@
 - **공유 `settings.json`**: 팀 전체가 동일하게 필요한 안전한 권한만. 예) 해당 레포의 빌드/테스트/조회 명령. **Bash와 PowerShell을 병기**한다.
 - **개인 `settings.local.json`**: 개인 취향, 실험적 권한, 머신 특화 경로. 커밋 안 됨.
 - 위험한 권한(광범위 삭제, 무제한 네트워크 등)은 공유에 넣지 않는다.
-- **`deny` 규칙은 레포에서 추가만 가능, 삭제 금지.** 표준 baseline의 deny(예: `.env` 읽기 금지)를 완화하려면 표준 레포 PR로만 한다.
+- **`deny` 규칙은 레포에서 추가만 가능, 삭제 금지.** 표준 baseline의 deny(예: `.env` 읽기와 수정 금지)를 완화하려면 표준 레포 PR로만 한다. 비밀 파일 패턴은 `Read`와 `Edit`를 짝으로 넣는다.
 - **위험 명령은 `ask`에 넣는다.** `ask`는 auto 모드에서도 분류기를 건너뛰고 사람에게 묻는다. `deny`와 `ask`는 폴더 신뢰 전에도 즉시 적용되지만 `allow`는 신뢰 수락 후에 적용된다.
-- **`.vscode/settings.json`의 `claudeCode.allowDangerouslySkipPermissions: false`는 완화 금지.** 워크스페이스 값이 개인 값을 이기므로, 이 한 줄이 레포 차원의 skip-permissions 방어다.
+- **작업 중인 변경이나 이력을 지우는 git 명령은 `ask`에 둔다.** `git restore`, `git checkout --`, `git reset --hard`, `git clean`, `git rebase`, `git branch -D`, `git stash drop`, `git add -A`가 해당된다. 같은 명령이 `allow`와 `ask`에 다 걸리면 `ask`가 이긴다.
+- **`.vscode/settings.json`의 `claudeCode.allowDangerouslySkipPermissions: false`는 완화 금지.** 워크스페이스 값이 개인 값을 이기므로, 이 한 줄이 레포 차원의 skip-permissions 방어다. VS Code 확장에만 적용되므로 CLI를 위해 `.claude/settings.json`의 `permissions.disableBypassPermissionsMode: "disable"`을 함께 둔다. 이 값도 개인 `settings.local.json`이 덮을 수 있어서, 완전히 잠그려면 managed settings에 둔다.
 
 > ⚠ **VS Code 승인 카드 주의**: 권한 프롬프트에서 "다시 묻지 않음"을 고를 때, VS Code 확장은 저장 위치로
 > **프로젝트 공유 파일(`.claude/settings.json`)** 을 선택할 수 있게 해준다(CLI는 개인 파일에만 쓴다).

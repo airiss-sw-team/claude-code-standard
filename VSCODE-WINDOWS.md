@@ -99,6 +99,10 @@ VS Code 확장이 새 대화의 권한 모드를 정하는 순서:
 
 이 한 줄이 **Bypass permissions 모드를 모드 선택기에서 제거**합니다. 표준 템플릿에 포함되어 있습니다 — 완화 금지.
 
+이 설정은 VS Code 확장에만 적용됩니다. 터미널의 `claude --dangerously-skip-permissions`는 `.claude/settings.json`의
+`"permissions": { "disableBypassPermissionsMode": "disable" }`가 막습니다. 표준 템플릿에 둘 다 들어 있습니다.
+개인 `settings.local.json`으로는 풀 수 있으므로, 조직 차원으로 잠그려면 managed settings(5절)에 같은 값을 둡니다.
+
 ---
 
 ## 4. 훅은 PowerShell 변형을 쓴다

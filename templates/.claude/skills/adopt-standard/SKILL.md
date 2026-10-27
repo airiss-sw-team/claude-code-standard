@@ -28,7 +28,8 @@ disable-model-invocation: true
 5. **settings.json**: 이 스택의 빌드/테스트 명령을 allow에 추가(ADOPTION.md 표 참조).
    - **Bash와 PowerShell을 반드시 병기한다.** 네이티브 Windows에서 Git for Windows가 없으면 Bash 도구 자체가 없어 `Bash(...)` 규칙이 하나도 매칭되지 않는다. 예: `"Bash(dotnet build:*)"` 와 `"PowerShell(dotnet build *)"`.
    - 이 레포에 **파괴적/장비성 명령**(DB 마이그레이션, 장비 제어, 배포)이 있으면 `ask`에 추가한다. `ask`는 auto 모드에서도 사람에게 묻는다.
-   - **deny는 절대 삭제하지 않는다.** 이 레포에 시크릿 파일 패턴이 더 있으면 `Read(...)` deny를 추가한다.
+   - **deny는 절대 삭제하지 않는다.** 이 레포에 시크릿 파일 패턴이 더 있으면 `Read(...)`와 `Edit(...)` deny를 짝으로 추가한다.
+   - 레포에 이미 `.claude/settings.json`이 있으면 표준의 `ask`, `deny`, `disableBypassPermissionsMode`를 빠짐없이 병합한다. 기존 `allow`에 `git restore`처럼 표준이 `ask`로 옮긴 명령이 있어도 `ask`가 이기므로 그대로 둬도 된다.
 
 6. **VS Code 설정**: `.vscode/settings.json`, `.vscode/extensions.json`이 복사되었는지 확인한다. 레포에 이미 `.vscode/settings.json`이 있으면 **덮어쓰지 말고 `claudeCode.*` 키만 병합**한다.
 
