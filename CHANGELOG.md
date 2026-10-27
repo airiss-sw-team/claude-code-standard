@@ -2,6 +2,22 @@
 
 표준 변경 이력. 버전은 [VERSION](VERSION)과 동기.
 
+## 0.12.0 — 2026-10-25
+
+**권한 baseline의 빈틈을 막았다.** 기존 레포는 `ADOPTION.md`의 기존 레포 갱신 절차로 `.claude/settings.json`에 아래 `ask`, `deny`, `disableBypassPermissionsMode`를 병합해야 적용된다.
+
+### `templates/.claude/settings.json`
+- `git restore`를 `allow`에서 `ask`로 옮겼다. 저장 안 한 수정을 묻지 않고 버릴 수 있었다.
+- `ask`를 넓혔다. `git clean -fd`만 묻던 것을 `git clean` 전체로 바꿨다(`git clean -xfd`가 그대로 통과했다). `git checkout --`, `git rebase`, `git branch -D`, `git stash drop`, `git add -A`, `git add .`를 더했다. `git add -A`는 0.11.0에서 규칙으로 금지했지만 권한으로는 막지 않고 있었다.
+- 비밀 파일 `deny`에 `Edit`를 짝으로 더했다. 전에는 읽기만 막고 덮어쓰기는 막지 않았다.
+- `permissions.disableBypassPermissionsMode: "disable"`을 더했다. 전에는 `.vscode/settings.json`만 Bypass 모드를 막아서 CLI의 `--dangerously-skip-permissions`는 막지 못했다.
+
+### `code-reviewer` 기억 범위
+- `memory: project`를 `memory: local`로 바꿨다. `project`는 기억을 레포의 `.claude/agent-memory/`에 저장해 git으로 공유될 수 있는데, 본문은 "개인 머신에 쌓이며 공유되지 않는다"고 설명하고 있었다. 의도대로 개인 기억으로 두고, `gitignore.snippet`에 `.claude/agent-memory-local/`을 더했다.
+
+### 문서
+- `GOVERNANCE.md` §2, `VSCODE-WINDOWS.md` 3절, `/adopt-standard` 5단계에 위 내용을 반영했다.
+
 ## 0.11.0 — 2026-10-25
 
 **개인 전역 규칙 중 팀 전체에 맞는 것을 표준으로 옮겼다.** 기존 레포는 `ADOPTION.md`의 기존 레포 갱신 절차로 규칙 파일을 다시 받아야 적용된다.
