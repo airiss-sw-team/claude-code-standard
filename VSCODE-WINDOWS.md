@@ -26,7 +26,7 @@ claude --version
 설치했는데 못 찾으면 `~/.claude/settings.json`에:
 
 ```json
-{ "env": { "CLAUDE_CODE_GIT_BASH_PATH": "C:\Program Files\Git\bin\bash.exe" } }
+{ "env": { "CLAUDE_CODE_GIT_BASH_PATH": "C:/Program Files/Git/bin/bash.exe" } }
 ```
 
 통합 터미널(`` Ctrl+` ``)에서 `claude`를 실행하면 IDE와 자동 연동됩니다(diff 뷰어와 진단 공유).
@@ -199,7 +199,7 @@ deny가 걸린 파일은 선택 텍스트도, 열린 파일 알림도 Claude에�
 VS Code 확장은 슬래시 명령의 **부분집합**만 노출하고, `!` bash 단축과 Tab 자동완성이 없습니다.
 아래는 통합 터미널에서 `claude`로:
 
-- `claude doctor` — 설정 파일 검증 (채택 직후 1회 필수)
+- `claude doctor` — 설정 파일 검증 (CLI가 있으면 채택 직후 1회 권장)
 - `claude mcp add ...` — MCP 서버 추가
 - `claude plugin validate ./plugin` — 플러그인 검증
 - `claude --resume` — 확장에서 하던 대화를 CLI에서 이어받기 (기록 공유됨)

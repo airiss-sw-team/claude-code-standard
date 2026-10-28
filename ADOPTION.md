@@ -69,7 +69,7 @@
 
 ### skills와 agents는 손대지 않는다
 
-`.claude/skills/`(8개)와 `.claude/agents/`는 **스택 무관**이라 그대로 두면 된다. 삭제 대상은 rules 뿐이다.
+`.claude/skills/`(9개)와 `.claude/agents/`는 **스택 무관**이라 그대로 두면 된다. 삭제 대상은 rules 뿐이다.
 스킬은 필요할 때만 로드되므로 안 쓰는 게 있어도 컨텍스트 비용이 거의 없다.
 이 레포 고유 절차가 생기면 `.claude/skills/<이름>/SKILL.md` 로 추가한다.
 
@@ -139,7 +139,7 @@
    ```bash
    diff -ru <repo>/.claude/rules/ <standard>/templates/.claude/rules/
    ```
-3. 각 rule 파일 하단의 출처 표기(`표준 원본: claude-code-standard vX.Y`)로 어느 버전에서 왔는지 추적한다.
+3. 각 rule 파일 상단(에이전트는 하단)의 출처 표기(`표준 원본: claude-code-standard vX.Y`)로 어느 버전에서 왔는지 추적한다.
    ⚠ 표준 레포에서 rule 내용을 고칠 때는 **이 표기도 함께 올린다.** 안 그러면 추적 메커니즘이 무효가 된다.
 4. 레포 고유 규칙은 **별도 파일**로 둔다. 표준에서 복사된 파일은 레포에서 직접 수정하지 않는다(수정이 필요하면 표준 레포에 PR).
 

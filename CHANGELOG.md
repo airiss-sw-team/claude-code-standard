@@ -2,6 +2,29 @@
 
 표준 변경 이력. 버전은 [VERSION](VERSION)과 동기.
 
+## 0.12.1 — 2026-10-28
+
+**처음 쓰는 사람이 START-HERE만 보고 막히지 않게 고쳤다.** 규칙과 권한은 바뀌지 않았다.
+
+### `START-HERE.md`
+- 표준 레포를 받는 `git clone` 명령과 위치를 넣었다. 전에는 "clone 해뒀다고 가정"만 있었다.
+- 기존 프로젝트에 `Copy-Item -Force`를 쓰면 기존 `.claude/settings.json`, `.vscode/settings.json`이 덮어써졌다. 새 폴더 전용이라고 경고하고, 기존 프로젝트는 이미 있는 파일을 건너뛰는 `robocopy ... /XC /XN /XO`로 복사한 뒤 `/adopt-standard`가 합치게 했다.
+- 마지막 커밋 예시의 `git add -A`(0.12.0부터 `ask` 대상)를 `/commit` 또는 파일 지정 커밋으로 바꿨다.
+- 명령을 터미널에 입력하는지 Claude 입력창에 입력하는지 표시했다. 흐름도의 gstack 단계에 "선택"을 붙였다.
+- 빈 폴더에서 `/adopt-standard`를 실행하면 스택을 묻는다는 안내를 넣었다.
+
+### `/adopt-standard`
+- 코드가 없으면 스택을 묻는다. `CLAUDE.md`가 이미 있으면 빠진 섹션만 더한다. 건너뛴 기존 설정 파일은 표준 레포 위치를 물어 합친다.
+- 새로 만든 스택 rule의 "표준 원본" 표기를 "이 레포 고유 규칙"으로 바꾼다. 남겨 두면 표준 파일 보호 훅이 그 파일 수정을 막았다.
+- 대상 레포에 없는 `ADOPTION.md` 표를 참조하던 allow 예시를 본문에 옮겼다.
+- Claude가 직접 할 수 없는 `/context`, `/` 메뉴 확인은 사용자에게 안내하도록 나눴다.
+
+### 그 외
+- 스킬 개수 "8개"를 9개로 고쳤다(`START-HERE.md`, `ADOPTION.md`).
+- rules, 템플릿, 에이전트의 출처 표기를 v0.11에서 v0.12로 올렸다(GOVERNANCE §4 점검 항목). 0.12.0에서 `code-reviewer`를 바꾸고 표기를 올리지 않았다.
+- `ADOPTION.md`: 출처 표기 위치를 "상단(에이전트는 하단)"으로 바로잡았다.
+- `VSCODE-WINDOWS.md`: JSON 예시의 경로를 `C:/Program Files/...`로 바꿨다(백슬래시 그대로 붙여 넣으면 JSON 오류). `claude doctor`를 "필수"에서 "CLI가 있으면 권장"으로 START-HERE와 맞췄다.
+
 ## 0.12.0 — 2026-10-25
 
 **권한 baseline의 빈틈을 막았다.** 기존 레포는 `ADOPTION.md`의 기존 레포 갱신 절차로 `.claude/settings.json`에 아래 `ask`, `deny`, `disableBypassPermissionsMode`를 병합해야 적용된다.
