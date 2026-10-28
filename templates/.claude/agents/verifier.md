@@ -65,4 +65,4 @@ model: inherit
 `git diff` 등은 Git Bash가 없는 환경에서는 Bash 도구 자체가 없으므로 PowerShell 도구로 실행한다.
 VS Code에서 실행 중이면 `mcp__ide__getDiagnostics`로 IDE가 이미 잡아둔 진단을 먼저 확인한다.
 
-<!-- 표준 원본: claude-code-standard v0.11 (변경은 표준 레포 PR로) -->
+<!-- 표준 원본: claude-code-standard v0.12 (변경은 표준 레포 PR로) -->

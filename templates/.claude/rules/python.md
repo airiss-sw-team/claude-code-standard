@@ -1,7 +1,7 @@
 # Python 규칙
 
 Python 레포(FastAPI 등 웹 백엔드, CLI, 스크립트, 데이터/ML)에서 활성화.
-※ 표준 원본: claude-code-standard v0.11 — 이 파일은 레포에서 직접 수정하지 말 것(표준 레포 PR로).
+※ 표준 원본: claude-code-standard v0.12 — 이 파일은 레포에서 직접 수정하지 말 것(표준 레포 PR로).
 
 ## 프로젝트와 의존성
 - 의존성/도구는 이 레포가 쓰는 매니저를 따른다(`uv`, `poetry`, `pip`+`requirements.txt` 등). 임의로 바꾸지 않는다.

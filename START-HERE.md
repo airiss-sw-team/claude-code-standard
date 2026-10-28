@@ -11,10 +11,10 @@
 
 ```mermaid
 flowchart LR
-    A([아이디어]) --> B[1. gstack로<br/>설계와 구조 잡기]
+    A([아이디어]) --> B[1. 선택: gstack로<br/>설계와 구조 잡기]
     B --> C[2. 표준 템플릿<br/>복사]
     C --> D[3. /adopt-standard<br/>자동 셋업]
-    D --> E[4. 설계와 디자인<br/>리뷰]
+    D --> E[4. 선택: 설계와<br/>디자인 리뷰]
     E --> F[5. 개발 →<br/>검증 → 커밋]
     F --> G([팀 공유 완료])
     style A fill:#e8f5e9
@@ -33,6 +33,10 @@ flowchart LR
 | **Claude Code** | 에디터/터미널에서 대화로 코드를 짜주는 AI 도구 |
 | **슬래시 명령 (`/이름`)** | 미리 짜둔 작업 묶음을 한 번에 부르는 단축키. 예: `/adopt-standard` |
 | **CLAUDE.md** | Claude가 세션 시작 때 자동으로 읽는 "이 프로젝트 설명서". = 팀 온보딩 문서 |
+
+**명령을 어디에 입력하나요?**
+- `powershell` 상자의 명령 → VS Code 메뉴 **터미널 → 새 터미널** (`` Ctrl+` ``)
+- `/`로 시작하는 명령 → VS Code 왼쪽 Claude 아이콘으로 연 **Claude 입력창**
 
 ---
 
@@ -61,7 +65,17 @@ git --version
 Git Bash가 없으면 Claude Code가 Bash 도구 없이 PowerShell 도구만 쓰게 되고, 동작이 미묘하게 달라집니다
 (자세히는 [VSCODE-WINDOWS.md](VSCODE-WINDOWS.md) 2절).
 
-### 3. (선택) gstack
+### 3. 이 표준 레포 받기
+
+회사 GitHub 계정으로 접근 권한이 있어야 합니다. 아래 예시는 `D:\claude-code-standard`에 받습니다. 다른 곳에 받으면 이후 명령의 경로도 바꾸세요.
+
+```powershell
+git clone https://github.com/airiss-sw-team/claude-code-standard.git D:\claude-code-standard
+```
+
+나중에 표준이 바뀌면 그 폴더에서 `git pull`로 최신을 받습니다.
+
+### 4. (선택) gstack
 설계, 리뷰, QA, 배포 자동화 스킬 묶음. 없어도 표준은 동작.
 설치법(Windows): 사내 정리 [gstack 설치 가이드](https://hgko-dev.tistory.com/540) 참고.
 
@@ -96,17 +110,18 @@ New-Item -ItemType Directory my-project
 Set-Location my-project
 git init
 
-# (2) 이 표준의 templates/ 안의 내용을 통째로 복사해 넣는다
-#     (claude-code-standard 를 clone 해뒀다고 가정 — 경로는 각자 위치로)
-Copy-Item -Path "D:\path\to\claude-code-standard\templates\*" -Destination . -Recurse -Force
+# (2) 이 표준의 templates/ 안의 내용을 통째로 복사해 넣는다 (빈 새 폴더라 덮어쓸 파일이 없다)
+Copy-Item -Path "D:\claude-code-standard\templates\*" -Destination . -Recurse -Force
 ```
+
+> ⚠ 이 복사 명령은 **새 폴더 전용**입니다. 이미 파일이 있는 프로젝트에서 쓰면 기존 `.claude/settings.json`, `.vscode/settings.json` 등이 덮어써집니다. 기존 프로젝트는 아래 [이미 진행 중인 프로젝트라면](#-이미-진행-중인-프로젝트라면)을 따르세요.
 
 > ⚠ PowerShell 5.1에서는 `&&`가 안 됩니다(`cmd`/bash 문법). 위처럼 줄을 나누거나 `;`로 이으세요.
 
 **Git Bash를 쓴다면**
 ```bash
 mkdir my-project && cd my-project && git init
-cp -r /d/path/to/claude-code-standard/templates/. .
+cp -r /d/claude-code-standard/templates/. .
 ```
 
 이제 내 프로젝트에 `CLAUDE.md.template`, `.claude/`, `.vscode/`, `docs/` 등이 생깁니다.
@@ -127,6 +142,8 @@ cp -r /d/path/to/claude-code-standard/templates/. .
 - ⚙️ `.gitignore`와 `.vscode` 정리, 권한(Bash+PowerShell 병기) 추가
 
 **즉, "복사 + `/adopt-standard`" 이 두 단계가 셋업의 전부입니다.**
+
+> 아직 코드가 없는 빈 폴더라면 Claude가 감지할 것이 없어 **어떤 스택으로 만들지 물어봅니다.** 정한 스택(예: Next.js, FastAPI, WPF)을 답하면 그에 맞춰 셋업합니다. 스택이 아직 안 정해졌으면 정해진 뒤에 실행하세요.
 
 > **첫 세션에 "이 폴더를 신뢰하시겠습니까?" 다이얼로그가 뜨면 수락하세요.**
 > 수락 전에는 레포의 `allow` 권한 규칙이 적용되지 않아 계속 승인 프롬프트가 뜹니다
@@ -173,8 +190,16 @@ cp -r /d/path/to/claude-code-standard/templates/. .
 
 마지막으로 **커밋**하면 끝. 이제 팀원이 이 레포를 clone하면 **같은 CLAUDE.md, 규칙, 명령**을 자동으로 갖게 됩니다.
 
+Claude 입력창에서:
+
+```
+/commit
+```
+
+Claude가 바뀐 파일을 확인하고 목적별로 나눠 커밋합니다. 직접 하려면 터미널에서 파일을 지정해 커밋합니다(`git add -A`는 다른 작업까지 딸려 들어갈 수 있어 표준에서 쓰지 않습니다).
+
 ```powershell
-git add -A
+git add CLAUDE.md .claude .vscode docs .gitignore
 git commit -m "표준 적용 + 초기 구조"
 ```
 
@@ -186,10 +211,16 @@ git commit -m "표준 적용 + 초기 구조"
 
 새로 만드는 게 아니라 **기존 코드가 큰 레포**에 도입하는 경우도 거의 같습니다:
 
-1. 2단계처럼 `templates/` 복사.
-2. `/adopt-standard` 실행 → Claude가 **기존 코드를 역설계**해서 CLAUDE.md(구조 지도와 빌드 명령)와 `docs/20_The_Wiki/architecture.md`를 채워 줍니다.
-3. 나온 초안을 팀이 검토하고 수정.
-4. 커밋. 끝.
+1. 작업 브랜치를 만듭니다: `git switch -c chore/claude-standard`
+2. `templates/`를 **이미 있는 파일은 건너뛰고** 복사합니다. 프로젝트 폴더의 터미널에서:
+   ```powershell
+   robocopy D:\claude-code-standard\templates . /E /XC /XN /XO
+   ```
+   `robocopy`는 Windows 기본 명령입니다. 끝에 "Copied"/"Skipped" 개수가 나오면 정상입니다.
+3. Claude 입력창에서 `/adopt-standard` 실행 → Claude가 **기존 코드를 역설계**해서 CLAUDE.md(구조 지도와 빌드 명령)와 `docs/20_The_Wiki/architecture.md`를 채워 줍니다.
+   - 건너뛴 기존 파일(`CLAUDE.md`, `.claude/settings.json`, `.vscode/settings.json`)은 지우지 않고 **표준 내용을 합칩니다.** 표준 레포 위치를 물으면 `D:\claude-code-standard`라고 답합니다.
+4. 나온 초안과 `git diff`를 팀이 검토하고 수정.
+5. 커밋(`/commit`). 끝.
 
 > 실제 적용 예시: 이 표준은 수십 개 프로젝트 규모의 대형 WPF 솔루션에 먼저 적용해봤습니다. 그 결과물이 레퍼런스입니다.
 
@@ -235,6 +266,6 @@ Bash 대신 PowerShell 도구가 쓰이는데 허용목록에 `PowerShell(...)`�
 당장 도움이 될 두 개만 꼽자면:
 
 - [VSCODE-WINDOWS.md](VSCODE-WINDOWS.md) — 권한 프롬프트가 계속 뜨거나 훅이 안 돌 때
-- [GUIDE.md](GUIDE.md) — 팀 공통 스킬 8개와 매일 쓰는 레시피
+- [GUIDE.md](GUIDE.md) — 팀 공통 스킬 9개와 매일 쓰는 레시피
 
 막히면 그냥 Claude Code에게 *"START-HERE 대로 하는 중인데 여기서 막혔어"* 라고 물어보세요.

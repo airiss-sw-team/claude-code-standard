@@ -1,7 +1,7 @@
 # .NET / WPF / Prism MVVM 규칙
 
 WPF 데스크톱(.NET, Prism/DryIoc) 레포에서 활성화.
-※ 표준 원본: claude-code-standard v0.11 — 이 파일은 레포에서 직접 수정하지 말 것(표준 레포 PR로).
+※ 표준 원본: claude-code-standard v0.12 — 이 파일은 레포에서 직접 수정하지 말 것(표준 레포 PR로).
 
 ## 아키텍처
 - **Prism 모듈 단위**로 기능을 나눈다. 각 기능 모듈은 `IModule`을 구현하고 `RegisterTypes`에서 DI 등록.
