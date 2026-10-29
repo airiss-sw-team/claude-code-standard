@@ -2,6 +2,21 @@
 
 표준 변경 이력. 버전은 [VERSION](VERSION)과 동기.
 
+## 0.12.2 — 2026-10-29
+
+**START-HERE를 271줄에서 100줄 안쪽으로 줄였다.** 규칙과 권한은 바뀌지 않았다.
+
+### `START-HERE.md`
+- 준비물 → 표준 받기 → 복사 → `/adopt-standard` → 확인과 커밋, 다섯 단계만 남겼다. 새 프로젝트와 기존 프로젝트는 3단계에서 명령 두 줄로 갈린다.
+- 명령마다 [터미널]인지 [Claude]인지 표시했다.
+- gstack 단계(아이디어 정리, 설계 리뷰)와 흐름도를 GUIDE 6장으로 옮겼다. 처음 쓰는 사람이 gstack을 필수로 오해하지 않게 한다.
+- FAQ 7개를 "막힐 때" 표 4줄로 줄였다. 스택 rule 삭제, `.template` 처리처럼 `/adopt-standard`가 대신 하는 일은 뺐다.
+
+### `GUIDE.md` 6장
+- gstack 명령 이름을 현재 버전에 맞췄다. `/checkpoint` → `/context-save`, `/context-restore`. gstack에 없는 `/wpf-audit`, `/audit`를 빼고 `/health`, `/guard`, `/design-consultation`을 더했다. `/simplify`는 빌트인이라고 적었다.
+- Impeccable은 `/impeccable <명령>` 형태로 고쳤다(`/audit` 같은 단축은 따로 등록해야 생긴다). `/teach-impeccable`은 `/impeccable init`으로.
+- START-HERE에서 옮긴 "표준 적용과 함께 쓰는 gstack 흐름"을 더했다.
+
 ## 0.12.1 — 2026-10-28
 
 **처음 쓰는 사람이 START-HERE만 보고 막히지 않게 고쳤다.** 규칙과 권한은 바뀌지 않았다.

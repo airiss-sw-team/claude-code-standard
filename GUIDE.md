@@ -212,7 +212,7 @@ gstack을 이미 쓴다면 `/codex`로 같은 효과를 낼 수 있다.
 셋 다 **개인별 설치**(`~/.claude/`)이며 레포에 커밋되지 않습니다. 표준 필수가 아닙니다.
 📖 **뭘 언제 쓰나** 비교: [AI 디자인 도구 3개 정리](https://hgko-dev.tistory.com/610)
 
-### gstack — 가상 엔지니어링 팀 (23+ 스킬)
+### gstack — 가상 엔지니어링 팀 (60개 넘는 스킬)
 
 Y Combinator Garry Tan이 공개한 본인의 Claude Code 셋업입니다.
 
@@ -241,11 +241,20 @@ git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git ~/.cl
 |---|---|
 | 기획/전략 | `/office-hours`, `/plan-ceo-review` |
 | 설계 리뷰 | `/autoplan`(CEO+Eng+Design 자동), `/plan-eng-review`, `/plan-design-review` |
-| 코드 품질 | `/review`, `/simplify`, `/investigate`, `/codex`(독립 이중검증) |
-| QA | `/qa`, `/qa-only`, `/wpf-audit`, `/audit` |
+| 디자인 기준 | `/design-consultation`(폰트, 색, 톤 → DESIGN.md, 프로젝트당 1회) |
+| 코드 품질 | `/review`, `/investigate`, `/health`(품질 대시보드), `/codex`(독립 이중검증) |
+| QA | `/qa`, `/qa-only` |
 | 배포/운영 | `/ship`, `/land-and-deploy`, `/canary`, `/cso` |
-| 안전장치 | `/careful`, `/freeze [경로]`, `/unfreeze` |
-| 회고/상태 | `/retro`, `/checkpoint` |
+| 안전장치 | `/careful`, `/freeze [경로]`, `/unfreeze`, `/guard`(둘 다) |
+| 회고/상태 | `/retro`, `/context-save`, `/context-restore` |
+
+`/simplify`는 gstack이 아니라 Claude Code 빌트인입니다. gstack 업데이트로 이름이 바뀌는 일이 잦으니, 표에 없는 명령은 Claude 입력창에서 `/gstack`으로 목록을 확인하세요.
+
+**표준 적용과 함께 쓰는 흐름** (START-HERE의 2~5단계 앞뒤에 끼움)
+```
+표준 적용 전:  /office-hours → /plan-ceo-review     아이디어를 계획으로. 결과는 docs/10_Raw_Sources/에
+표준 적용 후:  /autoplan (또는 /plan-eng-review, /plan-design-review)   코딩 전 설계 점검
+```
 
 **자주 쓰는 조합** (이 둘이 일상의 ~70%)
 ```
@@ -255,7 +264,7 @@ git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git ~/.cl
 
 ### Impeccable — AI가 만든 뻔한 UI 고치기 (웹/UI 프로젝트)
 
-20개 디자인 스킬 + 안티패턴 사전. `/audit` `/polish` `/critique` `/typeset` `/colorize` 등.
+`/impeccable` 하나 아래에 20여 개 명령이 있습니다. `/impeccable audit`, `/impeccable polish`, `/impeccable critique`, `/impeccable typeset`, `/impeccable colorize` 등. 인자 없이 `/impeccable`만 입력하면 메뉴가 나옵니다. 자주 쓰는 명령은 `/audit`처럼 단축 명령으로 따로 등록(pin)할 수 있습니다.
 
 ```bash
 # 프로젝트 루트에서
@@ -264,7 +273,7 @@ npx impeccable install
 /impeccable init
 ```
 
-**프로젝트당 1회 `/teach-impeccable`** 로 디자인 컨텍스트(대상, 용도, 브랜드 톤)를 먼저 심어두면
+**프로젝트당 1회 `/impeccable init`**(예전 이름 `/teach-impeccable`)으로 디자인 컨텍스트(대상, 용도, 브랜드 톤)를 먼저 심어두면
 이후 생성되는 UI가 일관됩니다. `DESIGN.md`를 만들면 CLAUDE.md에서 참조하세요.
 📖 사내 정리: [설치 가이드](https://hgko-dev.tistory.com/551), [사용 가이드](https://hgko-dev.tistory.com/550)
 

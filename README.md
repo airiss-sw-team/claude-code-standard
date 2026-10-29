@@ -14,7 +14,7 @@ AIRISS 개발팀이 **Claude Code를 일관되게** 쓰기 위한 표준 템플�
 
 | 나는… | 읽을 것 | 시간 |
 |---|---|---|
-| **팀에 처음 왔다 / 내 프로젝트에 적용하고 싶다** | **[START-HERE.md](START-HERE.md)** | 15분, 따라 하면서 |
+| **팀에 처음 왔다 / 내 프로젝트에 적용하고 싶다** | **[START-HERE.md](START-HERE.md)** | 20분, 따라 하면서 |
 | **매일 쓰는데 뭐가 있는지 모르겠다** | [GUIDE.md](GUIDE.md) — 레시피, 스킬 목록, 안티패턴 | 훑어보기 10분 |
 | **Windows/VS Code에서 뭔가 안 된다** | [VSCODE-WINDOWS.md](VSCODE-WINDOWS.md) — 권한, 훅, 모드가 CLI와 다른 지점 | 문제 생겼을 때 |
 | **큰 레포에 수동으로 적용해야 한다** | [ADOPTION.md](ADOPTION.md) — 절차, 검증, 체크리스트 | 레포당 1회 |
